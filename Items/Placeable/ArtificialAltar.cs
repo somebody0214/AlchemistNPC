@@ -1,17 +1,21 @@
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
 
 namespace AlchemistNPC.Items.Placeable
 {
 	public class ArtificialAltar : ModItem
 	{
-		public override void SetStaticDefaults()
-		{
-			Tooltip.SetDefault("Artificial Altar, made by occult powers");
-			DisplayName.AddTranslation(GameCulture.Russian, "Искусственный Алтарь");
-			Tooltip.AddTranslation(GameCulture.Russian, "Искусственный алтарь, созданный оккультными силами"); 
-		}
+        public override void SetStaticDefaults()
+        {
+            Tooltip.SetDefault("Artificial Altar, made by occult powers");
+            DisplayName.AddTranslation(GameCulture.Russian, "Искусственный Алтарь");
+            Tooltip.AddTranslation(GameCulture.Russian, "Искусственный алтарь, созданный оккультными силами");
+
+            DisplayName.AddTranslation(GameCulture.Chinese, "人造祭坛");
+            Tooltip.AddTranslation(GameCulture.Chinese, "人造祭坛, 使用神秘力量制作而成");
+        }
 
 		public override void SetDefaults()
 		{

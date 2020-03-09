@@ -5,6 +5,7 @@ using Terraria.ID;
 using Terraria.Enums;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.ObjectData;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework.Graphics;
@@ -29,7 +30,8 @@ namespace AlchemistNPC.Tiles
 			ModTranslation name = CreateMapEntryName();
 			name.SetDefault("Special Crafting Point");
 			name.AddTranslation(GameCulture.Russian, "СпецКрафтовый Поинт");
-			AddMapEntry(new Color(200, 200, 200), name);
+            name.AddTranslation(GameCulture.Chinese, "特殊手工位点");
+            AddMapEntry(new Color(200, 200, 200), name);
 			disableSmartCursor = true;
 			adjTiles = new int[]
 			{
@@ -43,8 +45,7 @@ namespace AlchemistNPC.Tiles
 			TileID.SteampunkBoiler,
 			TileID.IceMachine,
 			TileID.SkyMill,
-			TileID.HoneyDispenser,
-			TileID.LunarCraftingStation
+			TileID.HoneyDispenser
 			};
 			dustType = mod.DustType("JustitiaPale");
 			animationFrameHeight = 56;

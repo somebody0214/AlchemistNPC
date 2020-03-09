@@ -7,6 +7,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.ModLoader.IO;
 using Terraria.GameInput;
 using Terraria.Localization;
@@ -17,14 +18,15 @@ namespace AlchemistNPC.Buffs
 	{
 		public override void SetDefaults()
 		{
-			DisplayName.SetDefault("Pink Gold Soda Effect");
+			DisplayName.SetDefault("Pink Gold Soda");
 			Description.SetDefault("Removes most debuffs");
-			Main.buffNoSave[Type] = true;
 			Main.debuff[Type] = false;
 			canBeCleared = true;
-			DisplayName.AddTranslation(GameCulture.Russian, "Эффект Розово-золотой Соды");
-			Description.AddTranslation(GameCulture.Russian, "Убирает большинство дебаффов"); 
-		}
+			DisplayName.AddTranslation(GameCulture.Russian, "Розово-золотая Сода");
+			Description.AddTranslation(GameCulture.Russian, "Убирает большинство дебаффов");
+            DisplayName.AddTranslation(GameCulture.Chinese, "桃金苏打加持");
+            Description.AddTranslation(GameCulture.Chinese, "移除大部分Debuff");
+        }
 		
 		public override void Update(Player player, ref int buffIndex)
 		{

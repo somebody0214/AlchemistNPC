@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
 
 namespace AlchemistNPC.Items.Weapons
@@ -14,17 +15,20 @@ namespace AlchemistNPC.Items.Weapons
 			Tooltip.SetDefault("Shoots spread of Vortex Rockets"
 			+ "\n25% chance to not consume ammo");
 			DisplayName.AddTranslation(GameCulture.Russian, "Баллистический Уничтожитель Туманностей");
-			Tooltip.AddTranslation(GameCulture.Russian, "Стреляет веером Вихревых Ракет\n25% шанс не потратить патроны");
-		}
+            Tooltip.AddTranslation(GameCulture.Russian, "Стреляет веером Вихревых Ракет\n25% шанс не потратить патроны");
+
+            DisplayName.AddTranslation(GameCulture.Chinese, "星云狂怒毁灭者");
+            Tooltip.AddTranslation(GameCulture.Chinese, "发射出分裂的星璇弹\n25%的几率不消耗弹药");
+        }
 
 		public override void SetDefaults()
 		{
-			item.damage = 80;
+			item.damage = 70;
 			item.ranged = true;
 			item.width = 40;
 			item.height = 20;
-			item.useTime = 12;
-			item.useAnimation = 12;
+			item.useTime = 20;
+			item.useAnimation = 20;
 			item.useStyle = 5;
 			item.noMelee = true; //so the item's animation doesn't do damage
 			item.knockBack = 8;
@@ -55,7 +59,7 @@ namespace AlchemistNPC.Items.Weapons
 		
 		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
 		{
-				int numberProjectiles = 4 + Main.rand.Next(2);
+				int numberProjectiles = 3 + Main.rand.Next(2);
 				for (int i = 0; i < numberProjectiles; i++)
 					{
 					Vector2 perturbedSpeed = new Vector2(speedX, speedY).RotatedByRandom(MathHelper.ToRadians(15));

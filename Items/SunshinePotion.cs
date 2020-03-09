@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
  
 namespace AlchemistNPC.Items
@@ -16,8 +17,11 @@ namespace AlchemistNPC.Items
 			DisplayName.SetDefault("Sunshine Potion");
 			Tooltip.SetDefault("Increases light radius greatly");
 			DisplayName.AddTranslation(GameCulture.Russian, "Зелье Солнечного Сияния");
-			Tooltip.AddTranslation(GameCulture.Russian, "Значительно увеличивает радиус освещения вокруг персонажа"); 
-		}    
+			Tooltip.AddTranslation(GameCulture.Russian, "Значительно увеличивает радиус освещения вокруг персонажа");
+
+            DisplayName.AddTranslation(GameCulture.Chinese, "阳光药剂");
+            Tooltip.AddTranslation(GameCulture.Chinese, "极大的增强光照半径");
+        }    
 		public override void SetDefaults()
         {
             item.UseSound = SoundID.Item3;                 //this is the sound that plays when you use the item

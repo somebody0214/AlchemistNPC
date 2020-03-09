@@ -5,6 +5,7 @@ using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.ModLoader.IO;
 using Terraria.Localization;
 using Terraria.World.Generation;
@@ -14,43 +15,37 @@ namespace AlchemistNPC.Items.Weapons
 {
 	public class Twilight : ModItem
 	{
-		public bool AC = false;
-		public bool DTT = true;
-		public int DT = 0;
+		public static int counter = 0;
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Twilight (O-02-63)");
-			Tooltip.SetDefault("Eyes that never close, a scale that could measure all sins, and a beak that could swallow everything "
-			+ "\nprotected the Black Forest in peace, and those who could wield this could also bring peace."
+			Tooltip.SetDefault("''Eyes that never close, a scale that could measure all sins, and a beak that could swallow everything"
+			+ "\nprotected the Black Forest in peace, and those who could wield this could also bring peace.''"
 			+ "\n[c/FF0000:EGO weapon]"
 			+ "\nInflicts several types of damage on hit"
-			+ "\nDamage type could be changed by right-click"
-			+ "\nIf enemy have less than 10000 HP, then projectile will kill it");
+			+ "\nHits every enemy on screen by 200 each second while held"
+			+ "\nRight click teleports you to cursor, boosting your damage by 3x and making you unvulnerable for 2 seconds");
 			DisplayName.AddTranslation(GameCulture.Russian, "Сумерки (O-02-63)");
-			Tooltip.AddTranslation(GameCulture.Russian, "Глаза, что не закроются никогда, чешуя, что может измерить все грехи и клюв, \nкоторый способен поглотить всё, хранят Чёрный Лес в покое. \nИ те, кто способны носить ЕГО, тоже могут нести покой.\n[c/FF0000:Э.П.О.С. оружие]\nПричиняет несколько типов урона\nТип урона можно изменить с помощью нажатия правой кнопки мыши\nЕсли цель имеет меньше 10000 жизней, то снаряд убьёт её"); 
-		}
+            Tooltip.AddTranslation(GameCulture.Russian, "Глаза, что не закроются никогда, чешуя, что может измерить все грехи и клюв, \nкоторый способен поглотить всё, хранят Чёрный Лес в покое. \nИ те, кто способны носить ЕГО, тоже могут нести покой.\n[c/FF0000:Оружие Э.П.О.С.]\nПричиняет несколько типов урона\nРанит всех противников на экране по 150 урона каждую секунду\nПравый клик телепортирует вас на позицию курсора, делает вас неуязвимым и повышает ваш урон в 3 раза на 2 секунды");
+
+            DisplayName.AddTranslation(GameCulture.Chinese, "薄暝 (O-02-63)");
+            Tooltip.AddTranslation(GameCulture.Chinese, "'那永不闭合的眼睛, 那能衡量一切罪恶的天平, 那能吞噬一切的巨口'\n'这三者守护着黑森林的和平, 而那些能够同时驾驭这三者的人也能带来和平.'\n[c/FF0000:EGO 武器]\n对命中的敌人造成多种不同伤害\n握持时, 每秒对屏幕内所有敌人造成200点伤害\n右键传送到光标处, 伤害x3并且获得2秒无敌.");
+        }
 
 		public override void SetDefaults()
 		{
 			item.melee = true;
 			item.damage = 300;
-			item.width = 44;
-			item.height = 44;
-			item.useTime = 15;
-			item.useAnimation = 15;
+			item.width = 60;
+			item.height = 62;
+			item.useTime = 12;
+			item.useAnimation = 12;
 			item.useStyle = 1;
 			item.value = 10000000;
-			item.rare = 12;
-            item.knockBack = 6f;
+			item.rare = 11;
+            item.knockBack = 6;
             item.autoReuse = true;
 			item.UseSound = SoundID.Item1;
-			item.shoot = mod.ProjectileType("TP");
-			item.shootSpeed = 6f;
-		}
-		
-		public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
-		{
-			target.AddBuff(mod.BuffType("Twilight"), 600);
 		}
 		
 		public override bool AltFunctionUse(Player player)
@@ -58,66 +53,50 @@ namespace AlchemistNPC.Items.Weapons
 			return true;
 		}
 		
-		public override bool CanUseItem(Player player)
+		public override void HoldItem(Player player)
 		{
-			if (player.altFunctionUse == 2 && DT == 0 && DTT)
+			counter++;
+			if (counter == 60)
 			{
-				item.magic = true;
-				item.melee = false;
-				item.mana = 10;
-				item.shoot = 0;
-				item.damage = 300;
-				item.noMelee = true;
-				item.noUseGraphic = true;
-				DT++;
-				DTT = false;
+				counter = 0;
+				Projectile.NewProjectile(player.Center.X, player.Center.Y, 0f, 0f, mod.ProjectileType("Returner"), 200, 0, player.whoAmI);
 			}
-			if (player.altFunctionUse == 2 && DT == 1 && DTT)
-			{
-				item.magic = false;
-				item.melee = true;
-				item.mana = 0;
-				item.shoot = 0;
-				item.damage = 300;
-				item.noMelee = true;
-				item.noUseGraphic = true;
-				DT = 0;
-			}
-			if (!DTT)
-			{
-			DTT = true;
-			}
-			if (player.altFunctionUse == 0)
-			{
-				item.noMelee = false;
-				item.noUseGraphic = false;
-				item.useTime = 15;
-				item.useAnimation = 15;
-				item.damage = 300;
-				item.shoot = mod.ProjectileType("TP");
-			}
-			return base.CanUseItem(player);
 		}
 		
-		public override bool UseItem(Player player)
+		public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
 		{
-			if (DT == 0 || player.altFunctionUse == 2 & !DTT)
+			target.AddBuff(mod.BuffType("Twilight"), 600);
+		}
+		
+		public override bool CanUseItem(Player player)
+		{
+			if (player.altFunctionUse != 2)
 			{
-			Main.PlaySound(SoundID.MenuClose, player.position, 0);
-			string key = "Mods.AlchemistNPC.DC2";
-			Color messageColor = Color.Blue;
-			Main.NewText(Language.GetTextValue(key), messageColor);
-			AC = true;
+				if (((AlchemistNPCPlayer)player.GetModPlayer(mod, "AlchemistNPCPlayer")).ParadiseLost == true)
+				{
+					item.damage = 400;
+					item.useTime = 10;
+					item.useAnimation = 10;
+				}
+				else
+				{
+					item.damage = 300;
+					item.useTime = 12;
+					item.useAnimation = 12;
+				}
 			}
-			if (DT == 1 || player.altFunctionUse == 2 && DTT && !AC)
+			if (player.altFunctionUse == 2 && !player.HasBuff(mod.BuffType("TwilightCD")))
 			{
-			Main.PlaySound(SoundID.MenuOpen, player.position, 0);
-			string key = "Mods.AlchemistNPC.DC1";
-			Color messageColor = Color.Blue;
-			Main.NewText(Language.GetTextValue(key), messageColor);
+				player.AddBuff(mod.BuffType("TwilightBoost"), 120);
+				player.AddBuff(mod.BuffType("TwilightCD"), 600);
+				Vector2 vector = Main.screenPosition + new Vector2(Main.mouseX, Main.mouseY);
+				player.Teleport(vector, 1, 0);
 			}
-			AC = false;
-			return true;
+			if (player.altFunctionUse == 2 && player.HasBuff(mod.BuffType("TwilightCD")))
+			{
+				return false;
+			}
+			return base.CanUseItem(player);
 		}
 		
 		public override void AddRecipes()

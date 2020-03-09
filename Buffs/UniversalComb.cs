@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using System.Linq;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.ModLoader.IO;
 using Terraria.GameInput;
 using Terraria.Localization;
@@ -19,31 +16,31 @@ namespace AlchemistNPC.Buffs
 		{
 			DisplayName.SetDefault("Universal Combination");
 			Description.SetDefault("Perfect sum of Tank, Mage, Ranger and Summoner combinations");
-			Main.buffNoSave[Type] = false;
 			Main.debuff[Type] = false;
 			canBeCleared = true;
-			DisplayName.AddTranslation(GameCulture.Russian, "Комбинация Универсала");
-			Description.AddTranslation(GameCulture.Russian, "Идеальное сочетание Комбинаций Танка, Мага, Стрелка и Призывателя"); 
-		}
+			DisplayName.AddTranslation(GameCulture.Russian, "Универсальная комбинация");
+			Description.AddTranslation(GameCulture.Russian, "Идеальное сочетание Комбинаций Танка, Мага, Стрелка и Призывателя");
+            DisplayName.AddTranslation(GameCulture.Chinese, "万能药剂包");
+            Description.AddTranslation(GameCulture.Chinese, "完美结合了以下药剂包的Buff：\n坦克药剂包、魔法药剂包、射手药剂包以及召唤师药剂包");
+        }
 		
 		public override void Update(Player player, ref int buffIndex)
 		{
-			player.thrownDamage += 0.1f;
-            player.meleeDamage += 0.1f;
-            player.rangedDamage += 0.1f;
-            player.magicDamage += 0.35f;
-            player.minionDamage += 0.1f;
-			player.meleeCrit += 10;
-            player.rangedCrit += 10;
-            player.magicCrit += 12;
-            player.thrownCrit += 10;
+			AlchemistNPCPlayer modPlayer = player.GetModPlayer<AlchemistNPCPlayer>();
+			modPlayer.AllDamage10 = true;
+			modPlayer.AllCrit10 = true;
+			modPlayer.Defense8 = true;
+			modPlayer.DR10 = true;
+			modPlayer.Regeneration = true;
+			modPlayer.Lifeforce = true;
+			modPlayer.MS = true;
+			player.magicDamage += 0.25f;
+            player.magicCrit += 2;
 			player.statManaMax2 += 20;
             player.manaCost -= 0.02f;
 			player.manaRegenBuff = true;
-			player.statDefense += 8;
 			player.archery = true;
 			player.ammoPotion = true;
-			player.lifeRegen += 4;
 			player.lavaImmune = true;
             player.fireWalk = true;
             player.buffImmune[24] = true;
@@ -66,21 +63,31 @@ namespace AlchemistNPC.Buffs
 			player.buffImmune[mod.BuffType("RangerComb")] = true;
 			player.buffImmune[mod.BuffType("MageComb")] = true;
 			player.buffImmune[mod.BuffType("SummonerComb")] = true;
-			player.buffImmune[mod.BuffType("LongInvincible")] = true;
-			player.buffImmune[mod.BuffType("TitanSkin")] = true;
 			player.buffImmune[1] = true;
 			player.buffImmune[2] = true;
+			player.buffImmune[3] = true;
 			player.buffImmune[5] = true;
 			player.buffImmune[6] = true;
 			player.buffImmune[7] = true;
-			player.buffImmune[13] = true;
 			player.buffImmune[14] = true;
-			player.endurance += 0.1f;
-			player.lifeForce = true;
-            player.statLifeMax2 += player.statLifeMax / 5 / 20 * 20;
-			player.enemySpawns = true;
 			++player.maxMinions;
 			++player.maxMinions;
+			if (ModLoader.GetMod("MorePotions") != null)
+			{
+				if (player.HasBuff(mod.BuffType("MorePotionsComb")) || player.HasBuff(ModLoader.GetMod("MorePotions").BuffType("SoulbindingElixerPotionBuff")))
+				{
+					--player.maxMinions;
+				}
+				if (player.HasBuff(mod.BuffType("MorePotionsComb")) || player.HasBuff(ModLoader.GetMod("MorePotions").BuffType("DiamondSkinPotionBuff")))
+				{
+					player.statDefense -= 8;
+				}
+			}
+			if (player.thorns < 1.0)
+			{
+				player.thorns = 0.3333333f;
+			}
+			BuffLoader.Update(BuffID.ObsidianSkin, player, ref buffIndex);
 		}
 	}
 }

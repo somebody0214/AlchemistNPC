@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using AlchemistNPC.Projectiles;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
 
 namespace AlchemistNPC.Items.Weapons
@@ -12,13 +13,16 @@ namespace AlchemistNPC.Items.Weapons
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Grinder MK4 (T-05-41)");
-			Tooltip.SetDefault("The sharp teeth of the grinder makes a clean cut through the enemy."
+			Tooltip.SetDefault("''The sharp teeth of the grinder makes a clean cut through the enemy.''"
 			+ "\n[c/FF0000:EGO weapon]"
 			+ "\nIts attack goes through enemy invincibility frames"
 			+ "\nAfter certain amount of hits releases broken blades into enemies");
 			DisplayName.AddTranslation(GameCulture.Russian, "Дробильщик MK4 (T-05-41)");
-			Tooltip.AddTranslation(GameCulture.Russian, "Острые зубы этого дробильщика способны сделать чистый разрез сквозь врага.\n[c/FF0000:Э.П.О.С. оружие]\nЕго атаки проходят сквозь период неуязвимости противника\nПри нанесении определённого количество ударов выпускает отработавшие лезвия во врагов"); 
-		}
+            Tooltip.AddTranslation(GameCulture.Russian, "Острые зубы этого дробильщика способны сделать чистый разрез сквозь врага.\n[c/FF0000:Оружие Э.П.О.С.]\nАтаки игнорируют период неуязвимости противника\nПри нанесении определённого количество ударов выпускает отработанные лезвия во врагов");
+
+            DisplayName.AddTranslation(GameCulture.Chinese, "粉碎机MK4 (T-05-41)");
+            Tooltip.AddTranslation(GameCulture.Chinese, "'锋利的刀刃能将它的目标干净利落地锯开.'\n[c/FF0000:EGO 武器]\n攻击无视无敌帧\n在命中一定次数之后将破碎的刀片释放入敌人体内");
+        }
 
 		public override void SetDefaults()
 		{
@@ -27,7 +31,7 @@ namespace AlchemistNPC.Items.Weapons
 			item.useAnimation = 24;
 			item.useTime = 30;
 			item.shootSpeed = 3.7f;
-			item.knockBack = 6.5f;
+			item.knockBack = 6;
 			item.width = 32;
 			item.height = 32;
 			item.scale = 1f;
@@ -59,7 +63,14 @@ namespace AlchemistNPC.Items.Weapons
 		
 		public override bool CanUseItem(Player player)
 		{
-			// Ensures no more than one spear can be thrown out, use this when using autoReuse
+			if (((AlchemistNPCPlayer)player.GetModPlayer(mod, "AlchemistNPCPlayer")).ParadiseLost == true)
+					{
+					item.damage = 200;
+					}
+					else
+					{
+					item.damage = 35;
+					}
 			return player.ownedProjectileCounts[item.shoot] < 1; 
 		}
 	}

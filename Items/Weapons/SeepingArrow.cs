@@ -1,5 +1,6 @@
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
 
 namespace AlchemistNPC.Items.Weapons
@@ -10,8 +11,11 @@ namespace AlchemistNPC.Items.Weapons
 		{
 			Tooltip.SetDefault("The unusual usage of cursed materials.");
 			DisplayName.AddTranslation(GameCulture.Russian, "Проникающая стрела");
-			Tooltip.AddTranslation(GameCulture.Russian, "Необычное использование Проклятого Материала"); 
-		}
+			Tooltip.AddTranslation(GameCulture.Russian, "Необычное использование Проклятого Материала");
+
+            DisplayName.AddTranslation(GameCulture.Chinese, "炽焚箭");
+            Tooltip.AddTranslation(GameCulture.Chinese, "被诅咒材料的独特用法");
+        }
 
 		public override void SetDefaults()
 		{
@@ -21,7 +25,7 @@ namespace AlchemistNPC.Items.Weapons
 			item.height = 38;
 			item.maxStack = 999;
 			item.consumable = true;             //You need to set the item consumable so that the ammo would automatically consumed
-			item.knockBack = 1.5f;
+			item.knockBack = 1;
 			item.value = 10;
 			item.rare = 2;
 			item.shoot = mod.ProjectileType("SeepingArrow");   //The projectile shoot when your weapon using this ammo

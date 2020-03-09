@@ -3,8 +3,10 @@ using System;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.ID;
 using AlchemistNPC.NPCs;
+using AlchemistNPC.Interface;
 using AlchemistNPC;
 using Terraria.Localization;
  
@@ -13,16 +15,7 @@ namespace AlchemistNPC.NPCs
 	[AutoloadHead]
 	public class Brewer : ModNPC
 	{
-		public static bool Shop1 = true;
-		public static bool Shop2 = false;
-		public static bool Shop3 = false;
-		public static bool Shop4 = false;
-		public static bool Shop5 = false;
-		public static bool S1A = false;
-		public static bool S2A = false;
-		public static bool S3A = false;
-		public static bool S4A = false;
-		public static bool S5A = false;
+		public static int Shop = 1;
 		public override string Texture
 		{
 			get
@@ -34,13 +27,14 @@ namespace AlchemistNPC.NPCs
 		public override bool Autoload(ref string name)
 		{
 			name = "Brewer";
-			return mod.Properties.Autoload;
+			return AlchemistNPC.modConfiguration.BrewerSpawn;
 		}
 
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Brewer");
 			DisplayName.AddTranslation(GameCulture.Russian, "Варщица Зелий");
+            DisplayName.AddTranslation(GameCulture.Chinese, "药剂师");
             Main.npcFrameCount[npc.type] = 23;   
 			NPCID.Sets.AttackFrameCount[npc.type] = 4;
 			NPCID.Sets.DangerDetectRange[npc.type] = 500;
@@ -48,128 +42,162 @@ namespace AlchemistNPC.NPCs
 			NPCID.Sets.AttackTime[npc.type] = 45;
 			NPCID.Sets.AttackAverageChance[npc.type] = 30;
 			NPCID.Sets.HatOffsetY[npc.type] = -4;
-		
-		ModTranslation text = mod.CreateTranslation("ShopB1");
-		text.SetDefault("1st shop (Vanilla)                     ");
-		text.AddTranslation(GameCulture.Russian, "1-ый магазин (без модовоых)");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("ShopB2");
-		text.SetDefault("2nd shop (Mod/Thorium/Calamity/RG)");
-		text.AddTranslation(GameCulture.Russian, "2-ой магазин (Mod/Thorium/Calamity/RG)");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("ShopB3");
-		text.SetDefault("3rd shop (MorePotions)              ");
-		text.AddTranslation(GameCulture.Russian, "3-ий магазин (MorePotions)");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("ShopB4");
-		text.SetDefault("4th shop (UnuBattleRods/Tacklebox) ");
-		text.AddTranslation(GameCulture.Russian, "4-ый магазин (UnuBattleRods/Tacklebox)");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("ShopB5");
-		text.SetDefault("5th shop (Tremor/Wildlife/Sacred/Spirit/Cristilium/ExpSentr)");
-		text.AddTranslation(GameCulture.Russian, "5-ый магазин (Tremor/Wildlife/Sacred/Spirit/Cristilium/ExpSentr)");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("CycleShop");
-		text.SetDefault("Cycle Shop");
-		text.AddTranslation(GameCulture.Russian, "Смена магазина");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("Lillian");
-		text.SetDefault("Lillian");
-		text.AddTranslation(GameCulture.Russian, "Лилиан");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("Lucy");
-		text.SetDefault("Lucy");
-		text.AddTranslation(GameCulture.Russian, "Люси");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("Alice");
-		text.SetDefault("Alice");
-		text.AddTranslation(GameCulture.Russian, "Алиса");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("Rocksahn");
-		text.SetDefault("Rocksahn");
-		text.AddTranslation(GameCulture.Russian, "Роксанна");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("Agness");
-		text.SetDefault("Agness");
-		text.AddTranslation(GameCulture.Russian, "Агнесс");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("Mary");
-		text.SetDefault("Mary");
-		text.AddTranslation(GameCulture.Russian, "Мария");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("EntryB1");
-		text.SetDefault("Care to try this potion? It's supposed to grant wings.");
-		text.AddTranslation(GameCulture.Russian, "Хочешь попробовать это зелье? Оно должно дать тебе крылья.");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("EntryB2");
-		text.SetDefault("I don't think that was a Spelunker potion...");
-		text.AddTranslation(GameCulture.Russian, "Не думаю, что это было зелье Шахтера...");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("EntryB3");
-		text.SetDefault("I got my degrees from Riddle University.");
-		text.AddTranslation(GameCulture.Russian, "Я получила своё образование в Университете Загадок.");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("EntryB4");
-		text.SetDefault("There's a legendary yoyo known as the Sasscade.");
-		text.AddTranslation(GameCulture.Russian, "Существует Легендарное Йо-йо, известное как Сасскад.");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("EntryB5");
-		text.SetDefault("Aww, bread crumbs and beaver spit!");
-		text.AddTranslation(GameCulture.Russian, "Ох, хлебные крошки и слюни бобра!");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("EntryB6");
-		text.SetDefault("Hi, *cough* that wasn't an inferno potion!");
-		text.AddTranslation(GameCulture.Russian, "Привет, *кашель* это точно не было зельем Инферно!");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("EntryB7");
-		text.SetDefault("Have you seen two mechanical eyes around?");
-		text.AddTranslation(GameCulture.Russian, "Ты не видел двух Механических Глаз поблизости?");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("EntryB8");
-		text.SetDefault("That silly goose ");
-		text.AddTranslation(GameCulture.Russian, "Этот трусливый гусь ");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("EntryB9");
-		text.SetDefault(" is too afraid of using occult powers in Alchemy. And so his potions are just an useless water.");
-		text.AddTranslation(GameCulture.Russian, " слишком боится использовать оккультные силы в Алхимии. И поэтому его зелья лишь бесполезная водичка.");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("EntryB10");
-		text.SetDefault("*sneezes* Eww... I am always sneezing while these Goblins are around!");
-		text.AddTranslation(GameCulture.Russian, "*чихает* Фуу... Я всегда чихаю, когда эти Гоблины поблизости!");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("EntryB11");
-		text.SetDefault("Just don't let them in my house... There are so many needed supplies and instruments.");
-		text.AddTranslation(GameCulture.Russian, "Просто не пускай их в мой дом. Там очень много нужных материалов и инструментов.");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("EntryB12");
-		text.SetDefault("Is this a Martians Invasion? Are they going to enslave us all? Or they want to destroy us all? No one knows the answer...");
-		text.AddTranslation(GameCulture.Russian, "Это вторжение Марсиан? Она пришли чтобы поработить нас всех? Или они хотят нас уничтожить? Никто не знает ответа...");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("EntryB13");
-		text.SetDefault("Is it Blood Moon in the sky? I love it! It is so beautiful!");
-		text.AddTranslation(GameCulture.Russian, "Это Кровавая Луна в небесах? Я люблю её! Она так красива!");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("EntryB14");
-		text.SetDefault("I was born under the light of Blood Moon. I am always so excited while IT rises in the sky!");
-		text.AddTranslation(GameCulture.Russian, "Я была рождена под светом Кровавой Луны. Я всегда так взволнована когда ОНА восходит на небе!");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("EntryB15");
-		text.SetDefault("Yeah, I can understand why the other girls are annoyed, but that's not stopping my joy!");
-		text.AddTranslation(GameCulture.Russian, "Да, я понимаю, почему другие девушки раздражены, но это не прекращает моего веселья!");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("EntryB16");
-		text.SetDefault("As happy as I am, I'm not giving discounts - I'm not dumb.");
-		text.AddTranslation(GameCulture.Russian, "Насколько бы счастлива я не была, я не даю скидок - я ведь не глупая.");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("EntryB17");
-		text.SetDefault("Normally I'm confused with how ");
-		text.AddTranslation(GameCulture.Russian, "Обычно я бываю озадачена тем, как.");
-		mod.AddTranslation(text);
-		text = mod.CreateTranslation("EntryB18");
-		text.SetDefault(" is just as calm as I am, but then I remember ");
-		text.AddTranslation(GameCulture.Russian, " может быть так же спокойна, как я, но потом я вспоминаю ");
-		mod.AddTranslation(text);
-		}
+
+            ModTranslation text = mod.CreateTranslation("ShopB1");
+            text.SetDefault("1st shop (Vanilla)                     ");
+            text.AddTranslation(GameCulture.Russian, "1-ый магазин (без модовых)");
+            text.AddTranslation(GameCulture.Chinese, "第一商店 (原版)              ");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("ShopB2");
+            text.SetDefault("2nd shop (Mod/Calamity)");
+            text.AddTranslation(GameCulture.Russian, "2-ой магазин (Mod/Calamity)");
+            text.AddTranslation(GameCulture.Chinese, "第二商店 (模组/灾厄)");
+            mod.AddTranslation(text);
+			text = mod.CreateTranslation("ShopB21");
+            text.SetDefault("3rd shop (Thorium/RG)");
+            text.AddTranslation(GameCulture.Russian, "3-ий магазин (Thorium/RG)");
+			text.AddTranslation(GameCulture.Chinese, "第二商店 (瑟银/RG)");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("ShopB3");
+            text.SetDefault("4th shop (MorePotions)              ");
+            text.AddTranslation(GameCulture.Russian, "4-ый магазин (MorePotions)");
+            text.AddTranslation(GameCulture.Chinese, "第三商店 (更多药剂)         ");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("ShopB4");
+            text.SetDefault("5th shop (UnuBattleRods/Tacklebox/Tremor) ");
+            text.AddTranslation(GameCulture.Russian, "5-ый магазин (UnuBattleRods/Tacklebox/Tremor)");
+            text.AddTranslation(GameCulture.Chinese, "第四商店 (震颤/钓杆/钓具箱)");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("ShopB5");
+            text.SetDefault("6th shop (Wildlife/Sacred/Spirit/Cristilium/ExpSentr)");
+            text.AddTranslation(GameCulture.Russian, "6-ой магазин (Wildlife/Sacred/Spirit/Cristilium/ExpSentr)");
+            text.AddTranslation(GameCulture.Chinese, "第五商店 (Wildlife/圣域/魂灵/水晶之地/ExpSentr)");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("ShopsChanger");
+            text.SetDefault("Shops Changer");
+            text.AddTranslation(GameCulture.Russian, "Смена магазина");
+            text.AddTranslation(GameCulture.Chinese, "切换商店");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("Lillian");
+            text.SetDefault("Lillian");
+            text.AddTranslation(GameCulture.Russian, "Лилиан");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("Lucy");
+            text.SetDefault("Lucy");
+            text.AddTranslation(GameCulture.Russian, "Люси");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("Alice");
+            text.SetDefault("Alice");
+            text.AddTranslation(GameCulture.Russian, "Алиса");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("Rocksahn");
+            text.SetDefault("Rocksahn");
+            text.AddTranslation(GameCulture.Russian, "Роксанна");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("Agness");
+            text.SetDefault("Agness");
+            text.AddTranslation(GameCulture.Russian, "Агнесс");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("Mary");
+            text.SetDefault("Mary");
+            text.AddTranslation(GameCulture.Russian, "Мария");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("EntryB1");
+            text.SetDefault("Care to try this potion? It's supposed to grant wings.");
+            text.AddTranslation(GameCulture.Russian, "Хочешь попробовать это зелье? Оно должно дать тебе крылья.");
+            text.AddTranslation(GameCulture.Chinese, "要试试这药水吗?它应该会强化翅膀.");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("EntryB2");
+            text.SetDefault("I don't think that it was a Spelunker potion...");
+            text.AddTranslation(GameCulture.Russian, "Не думаю, что это было зелье Шахтера...");
+            text.AddTranslation(GameCulture.Chinese, "我不认为那是洞穴探险药水.");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("EntryB3");
+            text.SetDefault("I got my degrees in Riddle University.");
+            text.AddTranslation(GameCulture.Russian, "Я получила своё образование в Университете Загадок.");
+            text.AddTranslation(GameCulture.Chinese, "我得到了来自谜语大学的学位");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("EntryB4");
+            text.SetDefault("There's a legendary yoyo known as the Sasscade.");
+            text.AddTranslation(GameCulture.Russian, "Существует Легендарное Йо-йо, известное как Сасскад.");
+            text.AddTranslation(GameCulture.Chinese, "有一个传说中的悠悠球球被称为萨斯卡德.");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("EntryB5");
+            text.SetDefault("Aww, bread crumbs and beaver spit!");
+            text.AddTranslation(GameCulture.Russian, "Ох, хлебные крошки и слюни бобра!");
+            text.AddTranslation(GameCulture.Chinese, "哇哦，面包屑和海狸唾液!");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("EntryB6");
+            text.SetDefault("Hi, *cough* that wasn't an Inferno potion!");
+            text.AddTranslation(GameCulture.Russian, "Привет, *кашель* это точно не было зельем Инферно!");
+            text.AddTranslation(GameCulture.Chinese, "嗨, *咳咳* 那不是地狱降临药剂!");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("EntryB7");
+            text.SetDefault("Have you seen two mechanical eyes around?");
+            text.AddTranslation(GameCulture.Russian, "Ты не видел пару Механических Глаз поблизости?");
+            text.AddTranslation(GameCulture.Chinese, "你在周围看到双子魔眼了吗?");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("EntryB8");
+            text.SetDefault("That silly goose ");
+            text.AddTranslation(GameCulture.Russian, "Этот трусливый гусь ");
+            text.AddTranslation(GameCulture.Chinese, "那个愚蠢的 ");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("EntryB9");
+            text.SetDefault(" is too afraid of using occult powers in Alchemy. That's why his potions are just some useless water.");
+            text.AddTranslation(GameCulture.Russian, " слишком сильно боится использовать оккультизм в алхимии. И поэтому его зелья лишь бесполезная водичка.");
+            text.AddTranslation(GameCulture.Chinese, " 过于害怕在炼金术中使用神秘力量，所以他的药水只是一种没用的水.");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("EntryB10");
+            text.SetDefault("*sneezes* Eww... I always sneeze while these Goblins are around!");
+            text.AddTranslation(GameCulture.Russian, "*чихает* Фуу... Я всегда чихаю, когда эти Гоблины поблизости!");
+            text.AddTranslation(GameCulture.Chinese, "*啊嚏* 噫... 那些哥布林在附近时我总是打喷嚏.");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("EntryB11");
+            text.SetDefault("Just don't let them in my house... There are so many needed supplies and instruments.");
+            text.AddTranslation(GameCulture.Russian, "Просто не пускай их в мой дом. Там очень много нужных материалов и инструментов.");
+            text.AddTranslation(GameCulture.Chinese, "别让他们进入我的房子...我这儿有那么多的物资和设备.");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("EntryB12");
+            text.SetDefault("Is this a Martians Invasion? Are they going to enslave us all? Or do they want to destroy us all? No one knows the answer...");
+            text.AddTranslation(GameCulture.Russian, "Это вторжение Марсиан? Она пришли чтобы поработить нас всех? Или они хотят нас уничтожить? Никто не знает ответа...");
+            text.AddTranslation(GameCulture.Chinese, "这是一场外星入侵吗？他们会奴役我们所有人吗？亦或者毁灭我们？没人知道答案...");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("EntryB13");
+            text.SetDefault("Is it the Blood Moon in the sky? I love it! It is so beautiful!");
+            text.AddTranslation(GameCulture.Russian, "Это Кровавая Луна в небесах? Восхитительно! Она так красива!");
+            text.AddTranslation(GameCulture.Chinese, "天上的那个是血月吗？我喜欢！它看起来好漂亮！");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("EntryB14");
+            text.SetDefault("I was born under the light of Blood Moon. I am always so excited when IT appears!");
+            text.AddTranslation(GameCulture.Russian, "Я была рождена под светом Кровавой Луны. Я всегда так взволнована когда ОНА восходит на небе!");
+            text.AddTranslation(GameCulture.Chinese, "我出生的时候正好是血月，每当它升起时我都会变得很兴奋！");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("EntryB15");
+            text.SetDefault("Yeah, I can understand why other girls are annoyed, but that won't stop me!");
+            text.AddTranslation(GameCulture.Russian, "Да, я понимаю, почему другие девушки раздражены, но это меня не остановит!");
+            text.AddTranslation(GameCulture.Chinese, "是的，我能理解为什么女孩们会生气，但这并不能阻止我的快乐!");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("EntryB16");
+            text.SetDefault("As happy as I am, I'm not giving discounts - I'm not dumb.");
+            text.AddTranslation(GameCulture.Russian, "Насколько бы счастлива я не была, я не даю скидок - я ведь не глупая.");
+            text.AddTranslation(GameCulture.Chinese, "和我一样开心, 我也不会给你打折的 - 我又不傻.");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("EntryB17");
+            text.SetDefault("Normally I'm confused with how ");
+            text.AddTranslation(GameCulture.Russian, "Обычно я бываю озадачена тем, как.");
+            text.AddTranslation(GameCulture.Chinese, "通常我会很困惑为什么 ");
+            mod.AddTranslation(text);
+            text = mod.CreateTranslation("EntryB18");
+            text.SetDefault(" is just as calm as I am, but then I remember ");
+            text.AddTranslation(GameCulture.Russian, " может быть так же спокойна, как я, но потом я вспоминаю ");
+            text.AddTranslation(GameCulture.Chinese, " 和我一样从容冷静, 但是后来我想到了 ");
+            mod.AddTranslation(text);
+			text = mod.CreateTranslation("EntryB19");
+            text.SetDefault("I once traveled far away from Terraria to learn more about Alchemy. In my travels I've met a ''scientist of magic'' called Azanor. He showed me the secrets of something called ''thaumaturgy''.");
+            text.AddTranslation(GameCulture.Russian, "Я однажды выбралась из мира Террарии чтобы узнать больше об Алхимии. В своих путешествиях я встретила ''учёного магии'' по имени Азанор. Он показал мне тайны чего-то, названного ''тауматургия''.");
+             text.AddTranslation(GameCulture.Chinese, "我曾经远离泰拉大陆去了解更多有关炼金术的信息。 在我的旅行中，我遇到了一位名叫Azanor的“魔法科学家”。 他向我展示了一种叫做''thaumaturgy''的魔法奥秘。");
+	    mod.AddTranslation(text);
+        }
 
 		public override void SetDefaults()
 		{
@@ -189,7 +217,7 @@ namespace AlchemistNPC.NPCs
 		
 		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
 		{
-			if (NPC.downedBoss1)
+			if (NPC.downedBoss1 && AlchemistNPC.modConfiguration.BrewerSpawn)
 			{
 			return true;
 			}
@@ -284,6 +312,7 @@ namespace AlchemistNPC.NPCs
 				string EntryB16 = Language.GetTextValue("Mods.AlchemistNPC.EntryB16");
 				string EntryB17 = Language.GetTextValue("Mods.AlchemistNPC.EntryB17");
 				string EntryB18 = Language.GetTextValue("Mods.AlchemistNPC.EntryB18");
+				string EntryB19 = Language.GetTextValue("Mods.AlchemistNPC.EntryB19");
 				int Alchemist = NPC.FindFirstNPC(mod.NPCType("Alchemist"));
 				int partyGirl = NPC.FindFirstNPC(NPCID.PartyGirl);
 			if (Main.bloodMoon && partyGirl >= 0 && Alchemist >=0 && Main.rand.Next(4) == 0)
@@ -320,7 +349,7 @@ namespace AlchemistNPC.NPCs
 			{
 				return EntryB8 + Main.npc[Alchemist].GivenName + EntryB9;
 			}
-            switch (Main.rand.Next(7))
+            switch (Main.rand.Next(8))
             {
                 case 0:                                     
 				return EntryB1;
@@ -334,6 +363,8 @@ namespace AlchemistNPC.NPCs
 				return EntryB5;
                 case 5:
 				return EntryB6;
+				case 6:
+				return EntryB19;
                 default:
 				return EntryB7;
             }
@@ -343,39 +374,34 @@ namespace AlchemistNPC.NPCs
         {
             string ShopB1 = Language.GetTextValue("Mods.AlchemistNPC.ShopB1");
 			string ShopB2 = Language.GetTextValue("Mods.AlchemistNPC.ShopB2");
+			string ShopB21 = Language.GetTextValue("Mods.AlchemistNPC.ShopB21");
 			string ShopB3 = Language.GetTextValue("Mods.AlchemistNPC.ShopB3");
 			string ShopB4 = Language.GetTextValue("Mods.AlchemistNPC.ShopB4");
 			string ShopB5 = Language.GetTextValue("Mods.AlchemistNPC.ShopB5");
-			string CycleShop = Language.GetTextValue("Mods.AlchemistNPC.CycleShop");
-			if (Shop1)
+			string ShopsChanger = Language.GetTextValue("Mods.AlchemistNPC.ShopsChanger");
+			if (Shop == 1)
 			{
 			button = ShopB1;
-			S5A = false;
-			S1A = true;
 			}
-			if (Shop2)
+			if (Shop == 2)
 			{
 			button = ShopB2;
-			S1A = false;
-			S2A = true;
 			}
-			if (Shop3)
+			if (Shop == 21)
+			{
+			button = ShopB21;
+			}
+			if (Shop == 3)
 			{
 			button = ShopB3;
-			S2A = false;
-			S3A = true;
 			}
-			if (Shop4)
+			if (Shop == 4)
 			{
 			button = ShopB4;
-			S3A = false;
-			S4A = true;
 			}
-			if (Shop5)
+			if (Shop == 5)
 			{
 			button = ShopB5;
-			S4A = false;
-			S5A = true;
 			}
 			if (npc.FindBuffIndex(119) >= 0 && NPC.AnyNPCs(mod.NPCType("Alchemist")) && !NPC.AnyNPCs(mod.NPCType("Young Brewer")))
 			{
@@ -383,219 +409,443 @@ namespace AlchemistNPC.NPCs
 			}
 			else
 			{
-			button2 = CycleShop;
+			button2 = ShopsChanger;
 			}
         }
  
         public override void OnChatButtonClicked(bool firstButton, ref bool shop) 
 		{
-		if (firstButton)
+			if (firstButton)
             {
                 shop = true;
+				ShopChangeUI.visible = false;
             }
-		else
+			else
+			{
+				if (npc.HasBuff(119) && NPC.AnyNPCs(mod.NPCType("Alchemist")) && !NPC.AnyNPCs(mod.NPCType("Young Brewer")))
 				{
-					if (npc.FindBuffIndex(119) >= 0 && NPC.AnyNPCs(mod.NPCType("Alchemist")) && !NPC.AnyNPCs(mod.NPCType("Young Brewer")))
+					for (int k = 0; k < 255; k++)
 					{
-						NPC.SpawnOnPlayer(Main.myPlayer, mod.NPCType("Young Brewer"));
+						Player player = Main.player[k];
+						if (player.active)
+						{
+							NPC.SpawnOnPlayer(k, mod.NPCType("YoungBrewer"));
+							return;
+						}
 					}
-			if (Shop1 && S1A)
-						{
-						Shop2 = true;
-						Shop1 = false;
-						}
-			if (Shop2 && S2A)
-						{
-						Shop3 = true;
-						Shop2 = false;
-						}
-			if (Shop3 && S3A)
-						{
-						Shop4 = true;
-						Shop3 = false;
-						}
-			if (Shop4 && S4A)
-						{
-						Shop5 = true;
-						Shop4 = false;
-						}
-			if (Shop5 && S5A)
-						{
-						Shop1 = true;
-						Shop5 = false;
-						}
 				}
+				ShopChangeUI.visible = true;
+			}
 		}
  
 		public bool SacredToolsDownedAbaddon
 		{
 		get { return SacredTools.ModdedWorld.OblivionSpawns; }
 		}
+		
+		public bool SacredToolsDownedSerpent
+		{
+		get { return SacredTools.ModdedWorld.FlariumSpawns; }
+		}
+		
+		public bool SacredToolsDownedLunarians
+		{
+		get { return SacredTools.ModdedWorld.downedLunarians; }
+		}
+ 
+		public bool CalamityModRevengeance
+		{
+        get { return CalamityMod.World.CalamityWorld.revenge; }
+        }
+		
+		public bool CalamityModDownedBirb
+		{
+		get { return CalamityMod.World.CalamityWorld.downedBumble; }
+		}
+		public bool CalamityModDownedPolter
+		{
+		get { return CalamityMod.World.CalamityWorld.downedPolterghast; }
+		}
+		public bool CalamityModDownedYharon
+		{
+		get { return CalamityMod.World.CalamityWorld.downedYharon; }
+		}
+		public bool CalamityModDownedAstrum
+		{
+		get { return CalamityMod.World.CalamityWorld.downedStarGod; }
+		}
+		public bool CalamityModDownedCalamitas
+        {
+        get { return CalamityMod.World.CalamityWorld.downedCalamitas; }
+        }
+		public bool CalamityModDownedProvidence
+        {
+        get { return CalamityMod.World.CalamityWorld.downedProvidence; }
+        }
+		public bool CalamityModDownedAstrageldon
+        {
+        get { return CalamityMod.World.CalamityWorld.downedAstrageldon; }
+        }
  
         public override void SetupShop(Chest shop, ref int nextSlot)
         {
-		if (Shop1)
-			{
-shop.item[nextSlot].SetDefaults (ItemID.SwiftnessPotion);
-			shop.item[nextSlot].shopCustomPrice = 5000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.IronskinPotion);
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.RegenerationPotion);
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.MiningPotion);
-			shop.item[nextSlot].shopCustomPrice = 7500;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.BuilderPotion);
-			shop.item[nextSlot].shopCustomPrice = 5000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.ArcheryPotion);
-			shop.item[nextSlot].shopCustomPrice = 15000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.SummoningPotion);
-			shop.item[nextSlot].shopCustomPrice = 7500;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.EndurancePotion);
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.HeartreachPotion);
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.AmmoReservationPotion);
-			shop.item[nextSlot].shopCustomPrice = 7500;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.ThornsPotion);
-			shop.item[nextSlot].shopCustomPrice = 5000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.ShinePotion);
-			shop.item[nextSlot].shopCustomPrice = 5000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.NightOwlPotion);
-			shop.item[nextSlot].shopCustomPrice = 5000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.WarmthPotion);
-			shop.item[nextSlot].shopCustomPrice = 20000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.SpelunkerPotion);
-			shop.item[nextSlot].shopCustomPrice = 20000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.HunterPotion);
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.TrapsightPotion);
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.FlipperPotion);
-			shop.item[nextSlot].shopCustomPrice = 5000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.GillsPotion);
-			shop.item[nextSlot].shopCustomPrice = 5000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.InvisibilityPotion);
-			shop.item[nextSlot].shopCustomPrice = 5000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.WaterWalkingPotion);
-			shop.item[nextSlot].shopCustomPrice = 5000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.ObsidianSkinPotion);
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.FeatherfallPotion);
-			shop.item[nextSlot].shopCustomPrice = 7500;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.GravitationPotion);
-			shop.item[nextSlot].shopCustomPrice = 20000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.MagicPowerPotion);
-			shop.item[nextSlot].shopCustomPrice = 15000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.ManaRegenerationPotion);
-			shop.item[nextSlot].shopCustomPrice = 5000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.TitanPotion);
-			shop.item[nextSlot].shopCustomPrice = 7500;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.BattlePotion);
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.CalmingPotion);
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;			
-if (Main.hardMode)
-{		
-shop.item[nextSlot].SetDefaults (ItemID.LifeforcePotion);
-			shop.item[nextSlot].shopCustomPrice = 25000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.InfernoPotion);
-			shop.item[nextSlot].shopCustomPrice = 15000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.WrathPotion);
-			shop.item[nextSlot].shopCustomPrice = 25000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.RagePotion);
-			shop.item[nextSlot].shopCustomPrice = 25000;
-            nextSlot++;
-}
-shop.item[nextSlot].SetDefaults (ItemID.StinkPotion);
-			shop.item[nextSlot].shopCustomPrice = 7500;
-            nextSlot++;
-if (Main.hardMode)
-{	
-shop.item[nextSlot].SetDefaults (ItemID.LovePotion);
-			shop.item[nextSlot].shopCustomPrice = 7500;
-            nextSlot++;
-}
-if (Main.player[Main.myPlayer].anglerQuestsFinished >= 5)
-			{
-shop.item[nextSlot].SetDefaults (ItemID.FishingPotion);
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.SonarPotion);
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ItemID.CratePotion);
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;
-			}
-			}
-				if (Shop2)
+		if (Shop == 1)
 		{
-		shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("SunshinePotion"));
-			shop.item[nextSlot].shopCustomPrice = 15000;
-            nextSlot++;
-		if (NPC.downedBoss3)
+		shop.item[nextSlot].SetDefaults (ItemID.SwiftnessPotion);
+		shop.item[nextSlot].shopCustomPrice = 5000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.IronskinPotion);
+		shop.item[nextSlot].shopCustomPrice = 10000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.RegenerationPotion);
+		shop.item[nextSlot].shopCustomPrice = 10000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.MiningPotion);
+		shop.item[nextSlot].shopCustomPrice = 7500;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.BuilderPotion);
+		shop.item[nextSlot].shopCustomPrice = 5000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.ArcheryPotion);
+		shop.item[nextSlot].shopCustomPrice = 15000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.SummoningPotion);
+		shop.item[nextSlot].shopCustomPrice = 7500;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.EndurancePotion);
+		shop.item[nextSlot].shopCustomPrice = 10000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.HeartreachPotion);
+		shop.item[nextSlot].shopCustomPrice = 10000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.AmmoReservationPotion);
+		shop.item[nextSlot].shopCustomPrice = 7500;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.ThornsPotion);
+		shop.item[nextSlot].shopCustomPrice = 5000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.ShinePotion);
+		shop.item[nextSlot].shopCustomPrice = 5000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.NightOwlPotion);
+		shop.item[nextSlot].shopCustomPrice = 5000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.WarmthPotion);
+		shop.item[nextSlot].shopCustomPrice = 20000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.SpelunkerPotion);
+		shop.item[nextSlot].shopCustomPrice = 20000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.HunterPotion);
+		shop.item[nextSlot].shopCustomPrice = 10000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.TrapsightPotion);
+		shop.item[nextSlot].shopCustomPrice = 10000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.FlipperPotion);
+		shop.item[nextSlot].shopCustomPrice = 5000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.GillsPotion);
+		shop.item[nextSlot].shopCustomPrice = 5000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.InvisibilityPotion);
+		shop.item[nextSlot].shopCustomPrice = 5000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.WaterWalkingPotion);
+		shop.item[nextSlot].shopCustomPrice = 5000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.ObsidianSkinPotion);
+		shop.item[nextSlot].shopCustomPrice = 10000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.FeatherfallPotion);
+		shop.item[nextSlot].shopCustomPrice = 7500;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.GravitationPotion);
+		shop.item[nextSlot].shopCustomPrice = 20000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.MagicPowerPotion);
+		shop.item[nextSlot].shopCustomPrice = 15000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.ManaRegenerationPotion);
+		shop.item[nextSlot].shopCustomPrice = 5000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.TitanPotion);
+		shop.item[nextSlot].shopCustomPrice = 7500;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.BattlePotion);
+		shop.item[nextSlot].shopCustomPrice = 10000;
+		nextSlot++;
+		shop.item[nextSlot].SetDefaults (ItemID.CalmingPotion);
+		shop.item[nextSlot].shopCustomPrice = 10000;
+		nextSlot++;			
+			if (Main.hardMode)
 			{
-shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("BewitchingPotion"));
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;
-shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("FortitudePotion"));
+			shop.item[nextSlot].SetDefaults (ItemID.LifeforcePotion);
+			shop.item[nextSlot].shopCustomPrice = 25000;
+			nextSlot++;
+			shop.item[nextSlot].SetDefaults (ItemID.InfernoPotion);
 			shop.item[nextSlot].shopCustomPrice = 15000;
+			nextSlot++;
+			}
+			if (NPC.downedBoss3)
+			{
+			shop.item[nextSlot].SetDefaults (ItemID.WrathPotion);
+			shop.item[nextSlot].shopCustomPrice = 25000;
             nextSlot++;
-		if (Main.hardMode)
-				{		
-shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("InvincibilityPotion"));
-			shop.item[nextSlot].shopCustomPrice = 30000;
+			shop.item[nextSlot].SetDefaults (ItemID.RagePotion);
+			shop.item[nextSlot].shopCustomPrice = 25000;
             nextSlot++;
-shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("TitanSkinPotion"));
-			shop.item[nextSlot].shopCustomPrice = 50000;
-            nextSlot++;
-		if (NPC.downedMechBoss1 && NPC.downedMechBoss2 && NPC.downedMechBoss3)
+			}
+		shop.item[nextSlot].SetDefaults (ItemID.StinkPotion);
+		shop.item[nextSlot].shopCustomPrice = 7500;
+		nextSlot++;
+			if (Main.hardMode)
+			{	
+			shop.item[nextSlot].SetDefaults (ItemID.LovePotion);
+			shop.item[nextSlot].shopCustomPrice = 7500;
+			nextSlot++;
+			}
+			if (Main.player[Main.myPlayer].anglerQuestsFinished >= 5)
+			{
+			shop.item[nextSlot].SetDefaults (ItemID.FishingPotion);
+			shop.item[nextSlot].shopCustomPrice = 10000;
+			nextSlot++;
+			shop.item[nextSlot].SetDefaults (ItemID.SonarPotion);
+			shop.item[nextSlot].shopCustomPrice = 10000;
+			nextSlot++;
+			shop.item[nextSlot].SetDefaults (ItemID.CratePotion);
+			shop.item[nextSlot].shopCustomPrice = 10000;
+			nextSlot++;
+			}
+		shop.item[nextSlot].SetDefaults (ItemID.GenderChangePotion);
+		shop.item[nextSlot].shopCustomPrice = 100000;
+		nextSlot++;			
+		}
+		if (Shop == 2)
+		{
+			if (NPC.downedBoss2)
+			{
+			shop.item[nextSlot].SetDefaults (ItemID.StrangeBrew);
+			shop.item[nextSlot].shopCustomPrice = 10000;
+			nextSlot++;
+			}
+			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("SunshinePotion"));
+			shop.item[nextSlot].shopCustomPrice = 15000;
+			nextSlot++;
+			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("GreaterDangersensePotion"));
+			shop.item[nextSlot].shopCustomPrice = 25000;
+			nextSlot++;
+			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("Dopamine"));
+			shop.item[nextSlot].shopCustomPrice = 10000;
+			nextSlot++;
+			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("NatureBlessingPotion"));
+			shop.item[nextSlot].shopCustomPrice = 25000;
+			nextSlot++;
+			if (NPC.downedBoss3)
+			{
+				shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("BewitchingPotion"));
+				shop.item[nextSlot].shopCustomPrice = 10000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("FortitudePotion"));
+				shop.item[nextSlot].shopCustomPrice = 15000;
+				nextSlot++;
+				if (Main.hardMode)
+				{
+					shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("InvincibilityPotion"));
+					shop.item[nextSlot].shopCustomPrice = 30000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("TitanSkinPotion"));
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					if (ModLoader.GetMod("CalamityMod") != null)
 					{
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("BlurringPotion"));
-			shop.item[nextSlot].shopCustomPrice = 150000;
-            nextSlot++;
-		if (NPC.downedPlantBoss)
+						if (CalamityModRevengeance)
 						{
-shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("NinjaPotion"));
-			shop.item[nextSlot].shopCustomPrice = 75000;
-            nextSlot++;
+						shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("HeartAttackPotion"));
+						shop.item[nextSlot].shopCustomPrice = 250000;
+						nextSlot++;
+						}
+					}
+					if (NPC.downedMechBossAny)
+					{
+						shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("DiscordPotion"));
+						shop.item[nextSlot].shopCustomPrice = 200000;
+						nextSlot++;
+					}
+					if (NPC.downedMechBoss1 && NPC.downedMechBoss2 && NPC.downedMechBoss3)
+					{
+						shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("BlurringPotion"));
+						shop.item[nextSlot].shopCustomPrice = 150000;
+						nextSlot++;
+						if (NPC.downedPlantBoss)
+						{
+							shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("NinjaPotion"));
+							shop.item[nextSlot].shopCustomPrice = 75000;
+							nextSlot++;
+						}
+						if (NPC.downedGolemBoss)
+						{
+						shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("TrapsPotion"));
+						shop.item[nextSlot].shopCustomPrice = 50000;
+						nextSlot++;
 						}
 					}
 				}
 			}
-		if (ModLoader.GetLoadedMods().Contains("ReducedGrinding"))
+			if (ModLoader.GetMod("CalamityMod") != null)
+			{
+				shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("BoundingPotion"));
+				shop.item[nextSlot].shopCustomPrice = 20000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("CalciumPotion"));
+				shop.item[nextSlot].shopCustomPrice = 35000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("TriumphPotion"));
+				shop.item[nextSlot].shopCustomPrice = 30000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("TeslaPotion"));
+				shop.item[nextSlot].shopCustomPrice = 25000;
+				nextSlot++;
+				if (NPC.downedBoss3)
+				{
+					shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("PotionofOmniscience"));
+					shop.item[nextSlot].shopCustomPrice = 20000;
+					nextSlot++;
+					if (NPC.downedPlantBoss)
+					{
+						shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("ZergPotion"));
+						shop.item[nextSlot].shopCustomPrice = 30000;
+						nextSlot++;
+						shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("ZenPotion"));
+						shop.item[nextSlot].shopCustomPrice = 30000;
+						nextSlot++;
+					}
+					shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("YharimsStimulants"));
+					shop.item[nextSlot].shopCustomPrice = 100000;
+					nextSlot++;
+					if (Main.hardMode)
+					{
+						shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("CrumblingPotion"));
+						shop.item[nextSlot].shopCustomPrice = 50000;
+						nextSlot++;
+						shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("PhotosynthesisPotion"));
+						shop.item[nextSlot].shopCustomPrice = 50000;
+						nextSlot++;
+						shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("SoaringPotion"));
+						shop.item[nextSlot].shopCustomPrice = 40000;
+						nextSlot++;
+						shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("CadencePotion"));
+						shop.item[nextSlot].shopCustomPrice = 40000;
+						nextSlot++;
+						shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("FabsolsVodka"));
+						shop.item[nextSlot].shopCustomPrice = 100000;
+						nextSlot++;
+						shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("RevivifyPotion"));
+						shop.item[nextSlot].shopCustomPrice = 50000;
+						nextSlot++;
+						if (CalamityModDownedAstrageldon)
+						{
+							shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("AstralInjection"));
+							shop.item[nextSlot].shopCustomPrice = 10000;
+							nextSlot++;
+							shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("GravityNormalizerPotion"));
+							shop.item[nextSlot].shopCustomPrice = 30000;
+							nextSlot++;
+						}
+						if (NPC.downedPlantBoss)
+						{
+							shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("PenumbraPotion"));
+							shop.item[nextSlot].shopCustomPrice = 100000;
+							nextSlot++;
+						}
+						if (NPC.downedGolemBoss)
+						{
+							shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("TitanScalePotion"));
+							shop.item[nextSlot].shopCustomPrice = 40000;
+							nextSlot++;
+							shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("ShatteringPotion"));
+							shop.item[nextSlot].shopCustomPrice = 100000;
+							nextSlot++;
+						}
+						if (NPC.downedMoonlord)
+						{
+							shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("HolyWrathPotion"));
+							shop.item[nextSlot].shopCustomPrice = 100000;
+							nextSlot++;
+							shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("ProfanedRagePotion"));
+							shop.item[nextSlot].shopCustomPrice = 100000;
+							nextSlot++;
+						}
+						if (CalamityModDownedPolter)
+						{
+							shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("CeaselessHungerPotion"));
+							shop.item[nextSlot].shopCustomPrice = 25000;
+							nextSlot++;
+						}
+						if (CalamityModDownedYharon)
+						{
+							shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("DraconicElixir"));
+							shop.item[nextSlot].shopCustomPrice = 250000;
+							nextSlot++;
+						}
+					}
+				}
+			}
+		}
+		if (Shop == 21)
+		{
+			if (ModLoader.GetMod("ThoriumMod") != null)
+			{
+				if (NPC.downedBoss3)
+				{
+					shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("CreativityPotion"));
+					shop.item[nextSlot].shopCustomPrice = 10000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("EarwormPotion"));
+					shop.item[nextSlot].shopCustomPrice = 10000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("AssassinPotion"));
+					shop.item[nextSlot].shopCustomPrice = 10000;
+					nextSlot++;
+				}
+				if (Main.hardMode)
+				{
+					shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("InspirationReachPotion"));
+					shop.item[nextSlot].shopCustomPrice = 20000;
+					nextSlot++;
+				}
+				shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("GlowingPotion"));
+				shop.item[nextSlot].shopCustomPrice = 20000;
+				nextSlot++;
+				if (Main.hardMode)
+				{
+					shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("HolyPotion"));
+					shop.item[nextSlot].shopCustomPrice = 20000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("DashPotion"));
+					shop.item[nextSlot].shopCustomPrice = 20000;
+					nextSlot++;
+				}
+				shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("HydrationPotion"));
+				shop.item[nextSlot].shopCustomPrice = 10000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("BloodPotion"));
+				shop.item[nextSlot].shopCustomPrice = 10000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("ConflagrationPotion"));
+				shop.item[nextSlot].shopCustomPrice = 10000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("SilverTonguePotion"));
+				shop.item[nextSlot].shopCustomPrice = 20000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("AquaPotion"));
+				shop.item[nextSlot].shopCustomPrice = 10000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("FrenzyPotion"));
+				shop.item[nextSlot].shopCustomPrice = 20000;
+				nextSlot++;
+			}
+			if (ModLoader.GetMod("ReducedGrinding") != null)
 			{
 			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ReducedGrinding").ItemType("War_Potion"));
 			shop.item[nextSlot].shopCustomPrice = 15000;
@@ -613,106 +863,10 @@ shop.item[nextSlot].SetDefaults (ModLoader.GetMod("AlchemistNPC").ItemType("Ninj
 			shop.item[nextSlot].shopCustomPrice = 15000;
             nextSlot++;
 			}
-		if (ModLoader.GetLoadedMods().Contains("ThoriumMod"))
-		{
-				if (NPC.downedBoss3)
-				{
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("FrostCoatingItem"));
-			shop.item[nextSlot].shopCustomPrice = 5000;
-            nextSlot++;
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("ExplosiveCoatingItem"));
-			shop.item[nextSlot].shopCustomPrice = 5000;
-            nextSlot++;
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("GorganCoatingItem"));
-			shop.item[nextSlot].shopCustomPrice = 5000;
-            nextSlot++;
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("LifeLeechCoatingItem"));
-			shop.item[nextSlot].shopCustomPrice = 5000;
-            nextSlot++;
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("ToxicCoatingItem"));
-			shop.item[nextSlot].shopCustomPrice = 2500;
-            nextSlot++;
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("CreativityPotion"));
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("EarwormPotion"));
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;
-				}
-			if (Main.hardMode)
-				{
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("InspirationReachPotion"));
-			shop.item[nextSlot].shopCustomPrice = 20000;
-            nextSlot++;
-				}
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("GlowingPotion"));
-			shop.item[nextSlot].shopCustomPrice = 20000;
-            nextSlot++;
-			if (Main.hardMode)
-				{
-				shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("HolyPotion"));
-			shop.item[nextSlot].shopCustomPrice = 20000;
-            nextSlot++;
-				}
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("AccuracyPotion"));
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("BloodPotion"));
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("CombatPotion"));
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("ConflagrationPotion"));
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("SilverTonguePotion"));
-			shop.item[nextSlot].shopCustomPrice = 20000;
-            nextSlot++;
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("AquaPotion"));
-			shop.item[nextSlot].shopCustomPrice = 10000;
-            nextSlot++;
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("ThoriumMod").ItemType("FrenzyPotion"));
-			shop.item[nextSlot].shopCustomPrice = 20000;
-            nextSlot++;
 		}
-if (ModLoader.GetLoadedMods().Contains("CalamityMod"))
-					{
-						if (NPC.downedBoss3)
-						{
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("PotionofOmniscience"));
-			shop.item[nextSlot].shopCustomPrice = 20000;
-            nextSlot++;
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("ZergPotion"));
-			shop.item[nextSlot].shopCustomPrice = 30000;
-            nextSlot++;
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("ZenPotion"));
-			shop.item[nextSlot].shopCustomPrice = 30000;
-            nextSlot++;
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("YharimsStimulants"));
-			shop.item[nextSlot].shopCustomPrice = 100000;
-            nextSlot++;
-			if (Main.hardMode)
-							{
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("CadencePotion"));
-			shop.item[nextSlot].shopCustomPrice = 50000;
-            nextSlot++;
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("FabsolsVodka"));
-			shop.item[nextSlot].shopCustomPrice = 100000;
-            nextSlot++;
-			if (NPC.downedGolemBoss)
-								{
-			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("CalamityMod").ItemType("TitanScalePotion"));
-			shop.item[nextSlot].shopCustomPrice = 50000;
-            nextSlot++;
-								}
-							}
-						}
-					}
-		}
-		if (Shop3)
+		if (Shop == 3)
 		{
-			if (ModLoader.GetLoadedMods().Contains("MorePotions"))
+			if (ModLoader.GetMod("MorePotions") != null)
 			{
 			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("MorePotions").ItemType("HeavyRootsPotion"));
 			shop.item[nextSlot].shopCustomPrice = 7500;
@@ -845,9 +999,9 @@ if (NPC.downedMoonlord)
 }	
 }			
 		}
-		if (Shop4)
+		if (Shop == 4)
 		{
-		if (ModLoader.GetLoadedMods().Contains("UnuBattleRods"))
+		if (ModLoader.GetMod("UnuBattleRods") != null)
 			{
 			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("UnuBattleRods").ItemType("BobEscalationPotion"));
 			shop.item[nextSlot].shopCustomPrice = 10000;
@@ -868,7 +1022,7 @@ if (NPC.downedMoonlord)
             nextSlot++;
 				}
 			}
-		if (ModLoader.GetLoadedMods().Contains("Tacklebox"))
+		if (ModLoader.GetMod("Tacklebox") != null)
 		{
 			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("Tacklebox").ItemType("FrogPotion"));
 			shop.item[nextSlot].shopCustomPrice = 10000;
@@ -898,10 +1052,7 @@ if (NPC.downedMoonlord)
 				}
 			}
 		}
-		}
-		if (Shop5)
-		{
-			if (ModLoader.GetLoadedMods().Contains("Tremor"))
+		if (ModLoader.GetMod("Tremor") != null)
 				{
 			shop.item[nextSlot].SetDefaults (ModLoader.GetMod("Tremor").ItemType("InspirationPotion"));
 			shop.item[nextSlot].shopCustomPrice = 20000;
@@ -937,7 +1088,10 @@ if (NPC.downedMoonlord)
 					nextSlot++;
 					}						
 				}
-			if (ModLoader.GetLoadedMods().Contains("Wildlife"))
+		}
+		if (Shop == 5)
+		{
+			if (ModLoader.GetMod("Wildlife") != null)
 				{
 					shop.item[nextSlot].SetDefaults (ModLoader.GetMod("Wildlife").ItemType("BouncePotion"));
 					shop.item[nextSlot].shopCustomPrice = 10000;
@@ -979,11 +1133,17 @@ if (NPC.downedMoonlord)
 					nextSlot++;
 					}
 				}
-				if (ModLoader.GetLoadedMods().Contains("SacredTools"))
+				if (ModLoader.GetMod("SacredTools") != null)
 					{
 						if (NPC.downedBoss1)
 						{
 						shop.item[nextSlot].SetDefaults(ModLoader.GetMod("SacredTools").ItemType("ThrownPotion"));
+						shop.item[nextSlot].value = 30000;
+						nextSlot++;
+						}
+						if (Main.hardMode)
+						{
+						shop.item[nextSlot].SetDefaults(ModLoader.GetMod("SacredTools").ItemType("SandPotion"));
 						shop.item[nextSlot].value = 30000;
 						nextSlot++;
 						}
@@ -993,8 +1153,20 @@ if (NPC.downedMoonlord)
 						shop.item[nextSlot].value = 250000;
 						nextSlot++;
 						}
+					if(SacredToolsDownedSerpent)
+						{
+						shop.item[nextSlot].SetDefaults(ModLoader.GetMod("SacredTools").ItemType("BurnCure"));
+						shop.item[nextSlot].value = 250000;
+						nextSlot++;
+						}
+					if(SacredToolsDownedLunarians)
+						{
+						shop.item[nextSlot].SetDefaults(ModLoader.GetMod("SacredTools").ItemType("MoonlightPotion"));
+						shop.item[nextSlot].value = 250000;
+						nextSlot++;
+						}
 					}
-				if (ModLoader.GetLoadedMods().Contains("SpiritMod"))
+				if (ModLoader.GetMod("SpiritMod") != null)
 				{
 					shop.item[nextSlot].SetDefaults(ModLoader.GetMod("SpiritMod").ItemType("BismitePotion"));
 					shop.item[nextSlot].value = 10000;
@@ -1027,7 +1199,7 @@ if (NPC.downedMoonlord)
 					nextSlot++;
 					}
 				}
-				if (ModLoader.GetLoadedMods().Contains("CrystiliumMod"))
+				if (ModLoader.GetMod("CrystiliumMod") != null)
 				{
 				if (Main.hardMode)
 					{
@@ -1054,7 +1226,7 @@ if (NPC.downedMoonlord)
 					nextSlot++;
 					}
 				}
-				if (ModLoader.GetLoadedMods().Contains("ExpandedSentries"))
+				if (ModLoader.GetMod("ExpandedSentries") != null)
 				{
 				shop.item[nextSlot].SetDefaults(ModLoader.GetMod("ExpandedSentries").ItemType("SentryPotion"));
 				shop.item[nextSlot].value = 30000;
@@ -1064,6 +1236,15 @@ if (NPC.downedMoonlord)
 					shop.item[nextSlot].SetDefaults(ModLoader.GetMod("ExpandedSentries").ItemType("DefenderPotion"));
 					shop.item[nextSlot].value = 20000;
 					nextSlot++;
+					}
+				}
+				if (ModLoader.GetMod("Desiccation") != null)
+				{
+					if (NPC.downedBoss3 && Main.player[Main.myPlayer].anglerQuestsFinished >= 10)
+					{
+						shop.item[nextSlot].SetDefaults(ModLoader.GetMod("Desiccation").ItemType("QuestSkipPotion"));
+						shop.item[nextSlot].value = 30000;
+						nextSlot++;
 					}
 				}
 			}

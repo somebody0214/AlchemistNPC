@@ -1,9 +1,711 @@
-This mod adds 6 NPC (Alchemist, Brewer, Jeweler, Young Brewer, Operator and Architect), which sells potions including buff, health and mana. 
-New combinations of potions are sold by Young Brewer.
-Spawn condition for Alchemist, Jeweler & Brewer is kill the Eye of Ctulhu. 
-Young Brewer spawns while both Alchemist & Brewer are in the world and world is Hardmode.
-Spawn condition for Operator is kill EoW/BoC and Wing of the World is inside free housing.
-Architect will come if you have at least 5 any NPC and EoW/BoC is beaten.
+﻿This mod adds 9 NPCs (Alchemist, Brewer, Jeweler, Young Brewer, Operator, Architect, Tinkerer, Musician and Explorer), who sell potions, materials and some other stuff. 
+New combinations of potions are sold by the Young Brewer.
+The spawn condition for the Alchemist, the Jeweler, the Tinkerer & the Brewer is to kill the Eye of Ctulhu. 
+The Young Brewer spawns while both the Alchemist & the Brewer are in the world in Hardmode.
+The spawn condition for the Operator is to kill EoW/BoC and to have a Wing of the World inside a free housing.
+The Architect will come if you have at least 3 NPC.
+The Musician will come if you defeat Skeletron.
+The Explorer is a secret NPC. Try to figure out, how to spawn her.
+Full Mod Config support.
+v9.2
+-Added support to Elements Awoken mod for Operator. Fixed some other mod's errors.
+-Added support for Mod of Redemption for Operator.
+-Now Paper Tubes may drop from some modded bosses.
+-Now Antibuff mode shouldn't affect buffs with duration less than 30.0001 second.
+-Added afterimages for some projectiles.
+-Added all Broken Hero stuff from Vanilla/Thorium/Spirit/Litho's Armory mods.
+Available after beating Golem.
+-Added Solar Veil to Operator's shop.
+Available after beating Plantera.
+-Added Boom Box to Musician's 3rd shop.
+Allows to passively play music boxes placed in the last inventory slot.
+-Added Armor's module "Barrage" accessory. Support any your attack with some energy balls.
+Available after beating Moon Lord.
+-Added recipes for Obsidian, Honey and Crispy Honey blocks.
+-Added Calamity mod's Tesla Potion to Brewer's 2nd shop.
+-Added rewards for reaching 12500 and 15000 souls counter on Cracked Crown.
+-Nerfed Big Bird's Lamp.
+Now it pierces Ichor immunity after beating Plantera, inflicts Betsy's Curse after beating Golem and pierces Betsy's Curse immunity after beating Moon Lord.
+-Now Paradise Lost Wings actually increases run speed.
+-Reworked Symbiote accessory. Its stats now depending on world state.
+Cannot be crafted anymore. Can drop at the end of Blood Moon with 20%.
+-Resprites for both Cera Sumat legendaries (by Logar8521#0059) and new Explorer sprite.
+-Fixed Chaos Bomb hitbox colliding with ground too early.
+-Fixed XtraT's and Enchanced Shroomite's electric bolts being able to hurt player.
+-Fixed mod's NPC summoning items not working.
+-Fixed Materia Transmutators not working as Thorium Anvil and Arcane Armor Fabricator.
+-Fixed cycled sound of Blinker accessory.
+v9.1
+-Finally fixed all Paper Tubes MP desynchronizations.
+-Fixed mod's drops from Moon Lord with Calamity mod active.
+This related to Reversity Coins, Torn Note, Paper Tube and National Ugandan Treasure.
+-Buffed all legendary weapons.
+-Buffed some EGO weapons (In the name of Love and Hate).
+-Added Simulation Control Unit to Operator's EGO shop. Allows to control weather (rain, blizzard, sandstorm) and time.
+Available in hardmode (after beating any mech boss if coins drop is disabled).
+-Added Terrain Reformer to Operator's EGO shop. Pickaxe with right click function.
+Available after beating Moon Lord.
+-Added Dungeon and Space Holoprojector to Operator's EGO shop.
+Dungeon is available after beating Skeletron.
+-Added Feathers to Operator's shop.
+Available after beating Skeletron.
+-Added Forbidden Fragments to Operator's shop.
+Available after beating Sand Elemental.
+-Added Tinkerer's Horcrux to Jeweler's shop.
+-Added config option to disable catcheability of mod's town NPCs.
+-Counter Matter's projectile is now animated.
+-Increased cooldown time for ''Blinker'' acceessory
+-Reduced amount of lag with Nyctosythia and Enchanted Shroomite Bullets/arrows.
+-Reduced mod's size (for about 2.4 mb). Big thanks to Gotoro!
+v9.0
+-Reworked the whole reversity coins system.
+Now all player are gatharing coins to their "internal" storage.
+They can only be accessed while trading with Operator.
+-Reworked accessories tokens availability.
+Now they cannot be crafted from Perfection Token.
+Now can be bought from Tinkerer in hardmode.
+-Now Lifeform Analizer also creates laser pointer to rare creature (ticks each second).
+Can be toggled by Mod Configuration.
+-Added Master Yoyo Bag. Combines effects of Fire Gauntlet and Yoyo Bag, but gives bigger range bonus.
+Can be crafted on Mythril Anvil.
+-Added Braclet of Time Twist. 
+Drops from any treasure bag with 1:150 chance.
+-Added Blinker. Gives Blink Dash. 
+Available after beating Moon Lord.
+-Added Recall/Wormhole Potion price config options.
+-Added more materials to Operator's materials shops.
+-Added Assassin and Hydration potions to Thorium Combination.
+-Added fragments from Thorium mod to Operator.
+-Alchemist's Tremor shop is now replaced with Plants shop.
+-Removed dash ability from Ninja potion.
+-Fixed Simple Crafting Penny and both Materia Transmutators were not giving chance to save ingredients during craft (Alchemy Table feature).
+-Fixed Thorium Combination crafting bug.
+-Fixed Paper Tube multiplayer desync issue.
+-Fixed NetSend error in world file.
+-New awesome mod's icon by Alemeow#7389.
+v8.9.1
+-Mod browser error.
+-Added some more chinese localization.
+v8.9
+-Added new Holoprojector, Desert.
+-Added Immortality Field projector and FEAR emitter.
+IFp makes town NPCs to instantly respawn after being killed.
+FEAR emitter restricts non-boss enemies from going through its field.
+-Added 3 new prehardmode weapons. All drops from spider type enemies.
+Sword of Arachna drops from Wall Creeper with 5%. Infests enemies with spiders.
+Fang Ballista drops from Jungle Creepers with 5%. Shoots impaling arrow which may immobilize normal enemy.
+Spider Fangarang drops from Bloody Crawlers with 10%. Can stack up to 3. Poisons enemies on hit.
+They all also have early hardmode upgrades with spider fangs on normal anvil.
+-Alchemist Charms now also add some duration to buff potions depending on tier.
+-Potion of Darkness can no longer be used if any boss is alive. Removed Heart Ache debuff.
+-Added Swiftness potion to both Tank Combinations and Universal Combination.
+-Beach Teleporter potion now always teleport you to actual left or right side beach.
+It is independant from palms now.
+-Rebalanced some of the Operator's prices.
+-All Calamity references to crit were redone as mod calls.
+-Now Operator has separated shops for vanilla boss drops & materials shop and modded boss drops & materials shop.
+-Now defeating buffed Pumpking/Ice Queen is required to unlock Nightmare Fuel/Endothermic Energy in Operator's shop.
+-Removed Omniscience from Calamity combination, added Soaring and Bounding buffs.
+-Fixed Ban Hammer functionality. Now it will not instakill Destroyer or hardmode event bosses.
+And Dungeon Guardian now gets properly killed by it after the first hit.
+-Fixed drop chances for items with low chances of dropping. Now it should be even lower, as it should be.
+-Fixed/nerfed Penetrator's crit damage.
+-Fixed Moon Lord wasn't dropping Torn Note, Coins or National Ugandan Treasure while Calamity mod is active.
+-Fixed Thorium combination.
+-Cleaned up a lot of buffs code.
+-Added/fixed some more chinese localization.
+v8.8.1
+-Updated to tModloader 0.11.5.
+-Added support for Achievement Lib mod.
+-Now Bill Cipher drops additional item, which, while used, gives Demon Slayer buff.
+-Now Ravager, Astrum Aureus/Deus, Storm Weaver, Ceaseless Void and Signus drop Reversity Coins.
+-Fixed Titan Scale potion functionality in Calamity Combination.
+-Fixed hair drawing with equipped crowns from the mod.
+-Fishron Booster no longer gives dash, but gives additional 1% to all stats.
+-Zerg/Zen potions, Chaos/Tranquility Candles were moved to post Plantera.
+-Removed Anticheat from Ugandan Knuckles boss.
+-Jungle Teleporter potion now has different functions for left and right click.
+-Jungle Teleporter potion is now available after beating EoW/BoC.
+-Removed Dash from Thorium Combination.
+-Cleaned up some code.
+v8.8
+-Updated to tModloader 0.11.4.
+-Fixed incompatibility with latest Calamity mod build.
+-Architect can now come when you have 3 other NPCs and no longer requires to beat EoW/BoC.
+Some goods now require some bosses defeated.
+-Removed some obsolete coding.
+-Added Research Note#8, Portal's turret.
+-Added NULL Katana. 
+Available after beating Moon Lord.
+-Added Tome of Order, new mage legendary weapon. 
+Drops from any mob with 1:25000 chance.
+-Added Quest Skip Potion from Desiccation mod to 6th Brewer's shop.
+Available after beating Skeletron and finishing 10 fishing quests.
+-Strange Top Hat not summons Bill Cipher now.
+It can be used for crafting Dimensional Rift, which is a new summon item.
+-Hive is no longer a legendary weapon and replaced with a new one.
+Now Hive drops from Plantera with 5% chance.
+-Anti Buff item no longer has selling price.
+-Fixed Golem Booster.
+-Some more Chinese translation by tyhnoone.
+-New sprites for some items.
+v8.7
+-Updated to tModloader 0.11.3.
+-Added new mode, Anti Buff mode. During Anti Buff mode, player is immune to all buffs (not debuffs).
+Buffs without duration display are not disabled. Bosses and minibosses may drop permament boosting items. Their effects would work only if mode is on.
+Anti Buff activator can be crafted on Demon Altar.
+-Added Mod Config support. Now you may change config options ingame.
+-Removed clickability on texts of Shop Changer UIs.
+-Combinations now disable their certain boosts when Calamity Combination, Profaned Rage, Holy Wrath or Cadence potion buffs are active.
+-Added Heart of Greed. Makes any money dropped in the world go into player's inventory. Works if placed in inventory.
+Available after beating any mechanical boss.
+-Added More Potions Combination. 
+Available in hardmode.
+-Both Thorium and Spirit Combinations now take only 1 buff slot.
+-Some changes in Operator's shop.
+-Some new quotes for NPCs.
+-Some more new sprites by CC.
+-Holoprojectors no longer work while player is dead.
+-Fixed/added some more translations.
+-Fixed Shield Bar and Grinder MK4 sprites.
+-Fixed Godhead and Soul of Fear breaking true melee.
+v8.6
+-Updated for tModloader 0.11.1.
+-Fixed incompatibility with Calamity mod.
+-Reworked some weapons.
+-Nerfed Paradise Lost set bonus.
+-Fixed souls counter for Cracked Crown's pet in multiplayer.
+-Fixed some Thorium related lines of code.
+-Fix for Crucible of Cosmos functionality for Materia Transmutators.
+-Reworked swing attack for Stormbreaker.
+-Fixed energy capsules not being available if you have Overloaded Rick's Portal Gun.
+-Some more Chinese translation by ZHAY10086.
+-New sprites for some items/NPCs/buffs by CC#1547.
+v8.5
+-Reworked Paper Tubes mechanic for a bit. Now you need to unlock Paper Tubes manually other than giving them to Tinkerer NPC.
+This also mean that Paper Tubes now properly works in MP.
+-Statue mobs no longer drop Legendary weapons and no longer boost Bloodthirsty Blade.
+-PhD Degree Diploma is now a consumable other than inventory item.
+-Added new pet. Summoned by Cracked Crown.
+Drops from any mob with 1:33333 chance.
+-Added some Holoprojectors to Operator's EGO shop.
+They work as fake biome if placed. Not allows to spawn certain biome mobs, but may be useful for trading with NPCs or summoning bosses.
+-Added Prince's Magic Wand. Final upgrade for Magic Wand. Deals even more damage, has right click function.
+Suppose to be post DoG weapon. May be considered as OP if use it without Calamity mod.
+-Added Overloaded Rick's Portal Gun. Post Providence/Ragnarok upgrade. Fires more rapidly and deals more damage.
+-Added new Calamity mod potions to Brewer.
+-Added souls of Fear, Power and Vision. Available in hardmode.
+-Added Godhead (works as combo of those souls). Available in hardmode.
+-Added recipes for Purification Powder and Hallowed Seeds.
+-Added more support for Ancients Awakened.
+-Buffed some of the Legendaries pre Moon Lord.
+-Rebalanced some prices in Operator's shops.
+-Reworked some EGO weapons.
+-Operator now sells essences after beating respective Calamity boss or after beating Plantera.
+-Symbiote no longer affects weapons with usetime 3 or lower.
+-Some more Chinese translation from ZHAY10086.
+-Some new sprites by CC#1547.
+v8.4
+-Added new town NPC, Tinkerer. Sells different accessories after unlocking.
+Available after beating Eye of Cthulhu.
+-Added Paper Tube. Used for unlocking accessories.
+-Config options are now working properly.
+-Potions are now compatible with Calamity Mod's Rogue damage type.
+-Perfection Token now applies custom prefixes instead of vanilla.
+-Added more weapons to Ugandan Knuckles droplist.
+-Now Ugandan Knuckles has 2.5K player HP limit instead of 1.3K.
+-Zen and Zerg Potions are now available in hardmode (their initial recipes got changed).
+-Reworked Operator's prices.
+-Reworked Paradise Lost damage reduction.
+-Fixed Omega Healing Potion availability.
+-Fixed Calamity Combination stats boosts.
+-Added Chaos and Tranquility Candles to Jeweler's shop.
+v8.3.2
+-Fixed one annoying crash related to Musician's Shop Changer.
+-Fixed some translation related errors.
+v8.3.1
+-Just for consistency (and for preventing confusion with beta builds).
+v8.3
+-Reworked how exactly Shops Changer works.
+Now it opens shop immidietly after pressing certain shop button (~optimisation of time).
+-Base PotsPriceMulti is now 1. Config file is Alchemistv83.json now.
+-Added Penetrator, Legendary ranged weapon. Slow rifle with varied critical strike damage. Consumes 2 hp per shot.
+Increases stats through game progression.  Drop chance is 1:25000 from any mob.
+-Added Hive, Legendary magic weapon. Shoots beehive to enemies, which is releasing bees in airtime and collide.
+Increases stats through game progression.  Drop chance is 1:25000 from any mob.
+-Added Flask of the Alchemist, Legendary thrown weapon. Throws flask of the random type.
+Increases stats through game progression.  Drop chance is 1:25000 from any mob.
+-Added Counter Matter, Legendary summon support weapon. Neglects nearby enemy projectiles depending on CD. Makes you do 1 guaranteed crit after blocking the projectile.
+Increases stats through game progression. Drop chance is 1:25000 from any mob.
+-Added Nature Blessing Potion to Brewer's 2nd shop. Grants Dryad's Blessing Buff.
+Available anytime.
+-Added Greater Dangersense Potion to Brewer's 2nd shop. Grants Greater Dangersense Buff. It makes enemy projectiles to light and be colored yellow.
+Available anytime.
+-Added PHD Degree Diploma. Works while in inventory. Opens up healing interface after respawn. 
+Will not work if Nurse is dead. Drops from WoF.
+-Added Broken Dimensional Casket. Required for crafting working one. 
+Drops from WoF.
+-Added Dimensional Casket. Allows to trade with NPCs at any point of map.
+Can be crafted from Broken Dimensional Casket and some other materials.
+-Added World Warper and Modified World Warper.
+Allows you to teleport to any point of the map by right-clicking on full screen map.
+Not works if any boss is alive.
+Non-modified version can be bought from Operator's EGO shop. Breaks after use.
+Modified version can be bought from Explorer. Not breaks after use.
+-All Alchemist Charms are now provide different discounts. They are 10%, 25%, 35%, 50%.
+-Flasks in Young Brewer shop are in separate shop now.
+-Duke Fishron Treasure Bag is now available after beating Duke Fishron. 
+Same for Moon Lord Treasure Bag (available after beating Moon Lord).
+-All Legendaries drop chance is now 1:25000.
+-Pip-Boy's now also showing mana usage reduction.
+-Laetitia's armor now always showing its defense correctly.
+-Lowered prices for Recall, Wormhole and all mana potions.
+-Added support for Census - Town NPC Checklist mod.
+-Added support for Ancients Awakened.
+-Added some more music boxes from the Calamity Music mod to Musician's 2nd shop.
+-Added some more lines to NPCs.
+-Fixed Bloodthirsty Blade was not working in MP (thanks to Grox#6739).
+-Fixed 2nd Music boxes shop of Musician (returned all Calamity music boxes back).
+-Fixed some bugs with red Bees and Wasps.
+-Fixed potions being consumed from Piggy Bank no matter if potions saving effect was working.
+-Fixed special drops in MP.
+-Fixed UK and Bill Cipher exploits with Marked for Death and Glacial State debuffs.
+-Fixed some more crashes with Perfection Tokens.
+v8.2
+-Lowered prices for potions (2x multiplier by default and just +2x with Revengeance).
+-Added way for getting Alchemist Charm from Alchemist.
+-Now consumed Autoinjector doubles activated buffs durations. 
+-Now Bill Cipher gives permanent "Demon Slayer" buff to all players in MP.
+-Reworked Laoskadyn's projectile for a bit.
+-Reworked Tritantrum's projectile.
+-Reworked XtraT electric beam and Electrocute effect.
+-Some of the modded music boxes are now available in Hardmode.
+-New sprites for both Pip-Boy's.
+-Fixed Last Tantrum exploit in Bill Cipher boss battle.
+-Fixed Target Dummy were moving while being inflicted with Electrocute debuff.
+-Fixed special crafts of NPCs (Jeweler, Alchemist, Explorer).
+-Fixed some crashes with reforging tokens.
+-Fixed Pip-Boy's crash in Cheat Sheet item browser.
+-Fixed some MP issues with variables.
+v8.1 Hotfix
+-Fixed some MP issues.
+v8.0
+-Reworked multiple shops changing mechanic.
+-Multiplied most of the potions prices by 2x due to balance issues. Configurable by PotsPriceMulti value.
+-Now activated Revengeance multiplies prices for mod's potions related NPCs by 5x. Configurable by RevPrices.
+-Added config options to disable ^.
+-Added Perfection Token. Allows to reforge item to its best possible reforge. Consumes in process.
+Drops from bosses with >= 25K HP with 5% chance.
+-Added Menacing, Lucky, Violent and Warding Tokens. Can be crafted from Perfection Token.
+Can be used for getting exact reforge on accessory. Consumes in process.
+-Added Delta Rune, post Moon Lord (post Ragnarok/DoG) accessory. Gives various stats boosts and special effects.
+Can be crafted after beating Moon Lord/Ragnarok/DoG.
+-Added Devilsknife. Summoner weapon. May drop randomly with very low chance from bosses with >= 75000 HP post Moon Lord.
+-Added Bloodthirsty Blade. Non-class weapon. Becomes stronger after defeating any enemies. Damage is capped before Hardmode and defeating Moon Lord.
+Available after beating EoW/BoC.
+-Added Mordenkainen's Sword, post Plantera sword. Can slash enemies from the distance.
+Can be crafted with Excalibur, Magnet Sphere and some Ectoplasm on Mythril Anvil.
+-Added Pip-Boy 3000. While in inventory, shows most of the player's boosted stats.
+Available from Treasure Bags in hardmode with 1:150 chance.
+-Added Pip-Boy 4K. While in inventory, shows most of the player's boosted stats. 
+Also gives abilities of Cell Phone and allows to open TP menu by hotkey.
+Can be crafted after beating Plantera.
+-Added Christmas-W (F-02-49) EGO weapon. Causes some ornament balls to drop from the sky on swing.
+Can be crafted after beating EoW/BoC. 
+-Added Dopamine to Brewer's 2nd shop. Inflicts Happy! buff for 10 minutes.
+Available anytime.
+-Added 4 new music boxes. Available in Musician's 2nd shop in Hardmode.
+-Added pinkymod support for Operator.
+-Added some new lines for NPCs.
+-Added short introduction for Ugandan Knuckles boss.
+-Cera Sumat, Holy Avenger now has 1:20000 drop chance.
+-Rick's Portal Gun now uses Energy Capsules as ammo.
+-Removed Concentrated Dark Matter due to ^.
+-Balanced some of the mod's ammo.
+-Nerfed Laetitia's Gift and both Sephirothic Fruits.
+-Reworked availability of some Calamity mod Treasure Bags.
+-Reworked some of the projectiles homing capabilities. May reduce lags.
+-Thorium Coatings were moved to Young Brewer's shop.
+-Removed NON CALAMITY BUFF POTION lines from mod's potions.
+-Removed timings on summoner weapons/items.
+-Now Heart of Yui drops with small pixie state as default.
+-Now any wood can be used for making Wing of the World.
+-Lowered horizontal speed reduction by some sources.
+-Changed way of work of Jungle Teleporter Potion.
+-Changed some descriptions of items/notes.
+-Reworked True Uganda and Mind Burn debuffs. Now should be lagless.
+-Fixed issue with autopause and Otherworldly Portal.
+-Fixed Bill's despawn on summon while Calamity mod is not active.
+-Fixed issues with NPCs summoning items.
+-Fixed Potion of Darkness quickbuff overconsuming in Piggy Bank.
+-Fixed some Operator's Treasure Bags shops availability.
+-Cleaned up some of the code.
+-Some undocumented changes.
+v7.6.1
+-Fixed issue when Cera Sumat, Holy Avenger and The Light of Cera Sumat were not killing some enemies properly.
+v7.6
+-Removed support for Content Disabler mod (as AlchemistNPC Lite is released now).
+-Alchemist Charm Tier 3 and 4 are now providing real discounts for potions traders (Alchemist, Brewer and Young Brewer).
+-Added Cone of Cold magic book. Shoots spread of ice cold projectiles. They may slow or freeze normal enemies and some minibosses.
+Available early hardmode.
+-Improved translations for English and Russian languages by drh#1109 (except EGO items).
+-Increased use range of town NPC summoning items.
+-Stormbreaker can now be turned into thrown weapon. Modifiers are fixed to Legendary (melee) and Unreal (Thrown).
+-Curse of Light debuff no longer affects Plaguebringer Goliath and Queen Bee.
+-Fixed Mechanical Wings conflicting with boots.
+-Fixed Laetitia's Gift mechanics. Now it spawns Little Witch Monster automatically if you have Laetitia or Paradise Lost set equipped.
+Also fixed problem with draining HP while sets were equipped.
+-Fixed Alchemist Charm Tier 1 drop for MP.
+-Fixed sizes of Cera Sumat, Holy Avenger and The Light of Cera Sumat.
+v7.5.2
+-Fixed some MP issues.
+-Fixed Disaster Gauge appearing with Content Disabler.
+-Balls of Madness can no longer hurt friendly NPCs.
+-New sprites for Cera Sumat, Holy Avenger and The Light of Cera Sumat.
+v7.5.1
+-Fixed incompatibility with Content Disabler.
+v7.5
+-Added new NPC, Musician. Sells diffirent music boxes. Comes after beating Skeletron.
+-Added Charm of Absolute Luck. Also affects accessories now. Can be crafted after beating Golem.
+Charm of Luck only affects weapons/endless pouches/quivers.
+-Added Rick's Portal Gun, reference to Rick and Morty. Opens portals to dangerous dimensions, letting the things from there damaging the enemies.
+Explorer's weapon.
+-Added Shield Belt, reference to Unreal Tournament. 
+Reduces incoming damage by up to 150, then requires recharge. Damage reduction is weaker on Revengeance/Death Mode (minimal damage is 30).
+Available after beating Moon Lord.
+-Added Molecular Replicator. Restores life of damaged friendly NPCs nearby over time while placed.
+Available after beating Golem on Expert Mode.
+-Added Mechanical Wings. Allows to flight and shooting nearby enemies with laser.
+Available after beating Golem.
+-Added Jungle Teleporter Potion. Allows to teleport to the leftest or rightest top jungle point.
+Available in hardmode.
+-Added Celestial Hook, upgrade for Lunar Hook. Faster by all means and reaches even further.
+Available post Moonlord (post Providence/post Ragnarok with Calamity/Thorium mods loaded).
+-Added "Wail of Banshee" scroll. One use item. Kills all normal enemies onscreen. Inflicts debuff Exhausted for 1 minute.
+May drop from random boss with >=75000 HP after beating Moon Lord.
+-Added "Executioner's Eyes" scroll. One use item. For 1 minute makes you deal 15% more damage (not lowered by any caps), +5% critical strike chance and your critical hits may crit again with 5%, dealing 4x damage. 
+Inflicts debuff Exhausted for 1 minute after ending of effect. 
+May drop from random boss with >=75000 HP after beating Moon Lord.
+-Added "Symbol Of Pain" scroll. One use item. Makes you deal 25% more damage (not lowered by any caps) and making enemies deal 1/4 less damage for 1 minute. Inflicts debuff Exhausted for 1 minute. 
+May drop from random boss with >=75000 HP after beating Moon Lord.
+-Added "Meteor Swarm" scroll. One use item. Makes short Meteor Rain from the sky. Inflicts debuff Exhausted for 1 minute.
+May drop from random boss with >=75000 HP after beating Moon Lord.
+-Added "Cloak of Fear" scroll. One use item. Makes normal enemies feared for 10 seconds if they come nearby you. Inflicts debuff Exhausted for 30 seconds after ending of effect.
+May drop from random boss with >=75000 HP after beating Moon Lord.
+-Added Terrarian-A (V-05-516) and Terrarian-W (V-05-516) EGO equipment. Both available at early hardmode.
+A is an accessory which gives effect of Cross Necklace and have special effect at day or night time.
+W is a pre mechanical boss combination of Laser and Clockwork Assault Rifles.
+-Added Caught Unicorn item. Now required for Research Note#2 recipe instead of Gold Bunny.
+-Added Horrifying Skull. Summons Dungeon Guardian.
+Can be bought from Jeweler after beating Skeletron for 15 gold each.
+-Now Alchemist Charm tier 2-4 allows to use potions from Piggy Bank by Quick Buff button.
+-Increased amount of dropped Celestial's Particles from DG.
+-Added petals from Thorium mod to Operator's shop.
+-Added head icon for Otherworldly Portal.
+-Added interface bars for Disaster Gauge and Shield Belt's Charge.
+-Tenebris, Lumenyl and Depth Cells are now available after beating Plantera in Operator's shop.
+-Pumpking, Mourning Wood, Ice Queen, Santa NK1 and Everscream now cannot be instakilled by Ban Hammer.
+-Laetitia's Gift no longer consumes life if full set of armor is on.
+-Added new line for Operator.
+-Changed prices for some items.
+-Thorium and Spirit buffs can now be toggled by turning of visibility of Autoinjector MK2.
+-Watcher Amulet now supports sentries count increase.
+-Config options for disabling spawn of NPCs now working properly.
+-Fixed bosses mp desync problem.
+-Fixed town NPCs summoning mp desync problem.
+-Fixed targeting for some "shooting" projectiles.
+-Fixed hitboxes for "Akumu" and Unchained "Akumu" shields.
+-Fixed multiple non-stackeable items consuming on creating Explorer weapons.
+-Fixed set bonuses for some sets.
+-Fixed drop for Charm of Luck. Now will always drop from Wall of Flesh.
+-Fixed Charm of Luck effect worked on consumables.
+-Fixed Old One's Army Treasure Bags availability.
+-Fixed Cadance HP boosting effect of Calamity Combination.
+-Fixed Fabsol being able to drop in non-Revengeance worlds.
+-Nerfed Sasscade and True Sasscade Yo-yos.
+-Nerfed earlygame stats of Holy Avenger.
+-Nerfed Watcher Amulet.
+-Some secret stuff.
+v7.4.1
+-Added config options for disabling certain town NPCs spawn (AlchemistNPCv741.json).
+-Added Charm of Luck. Drops after beating Wall of Flesh for the first time.
+Gives better chance to get good reforge.
+-Added Waspnades, direct upgrade for Beenades. Releasing Wasps instead of Bees.
+Available after beating Plantera.
+-Added Cursed Ice, Divine Lava and Elemental Waspnades, direct upgrades for Waspnades. Inflicting several debuffs and dealing more damage.
+Available after beating Plantera (Elemental is available after beating Moon Lord).
+-Fixed Fabsol drop with Calamity Combination.
+-Fixed Sasscade and True Sasscade Yo-yos line breaking.
+-Fixed MP issues with Pillars.
+-Fixed random warns and crashes with CAE projectile and "Cera Sumat".
+-Fixed recipe for Unchained Akumu.
+-Changed mechanic of Unchained Akumu while player have >35% of HP.
+-Changed recipes for Alchemist Charm Tiers 2-4.
+-Changed Drainer mechanic. Now less likely to stupidly kill player.
+-Raised damage reduction cap for secret boss to 50%.
+-Emagled Fragmentation now renamed to Celestial's Particle.
+-New sprite for Extractor.
+v7.4
+-Added Sacred Tools, Spirit and Enigma mods support for Operator's Modded Treasure Bags shops.
+-Added Alchemist Charm tier 1-4. Gives you chance not to consume potion while placed in inventory. 
+Drops after beating Eye of Cthulhu for the first time.
+-Added "Cera Sumat", Holy Avenger true melee Legendary Sword. Boosting stats through game progression. Inflicts heavy enemy weakening debuff.
+Can drop from any enemy with 1:15000 chance.
+-Added "Light of Cera Sumat" and Pommel. Direct upgrade for Holy Avenger.
+Available post Moon Lord.
+-Added "In the name of Love and Hate" (O-01-04) magic EGO weapon. Shoots 4 different types of projectile.
+Available post Moon Lord.
+-Added Chain Gun "Meat Grinder", reference to Planet Alkatraz 2. Gains shooting speed over time. Uses special ammo.
+Available post Moon Lord.
+-Added Symbiote, post Moon Lord (post DoG and post Ragnarok) accessory.
+Increases damage and crit by 10%, heavily decreases cooldown of healing potions. Has 2 states depending on HP.
+-Added Dark Magic Wand. Direct upgrade for Magic Wand. Releases wider beam and charges even more over time.
+Available post Moon Lord (post Providence and Ragnarok).
+-Added True Sasscade Yo-yo. Direct upgrade for Sasscade. Shoots Nebula Arcanums to nearby enemies.
+Available post Moon Lord (post Providence and Ragnarok).
+-Added Eye of Pure Judgement. Direct upgrade for Eye of Judgement. Working twice as fast now and endurance drop is now only 17%.
+Available post Moon Lord (post Providence and Ragnarok).
+-Added Unchained Akumu. Direct upgrade for Akumu. Not lowers power while shield is active and shield now activates at 35% of HP.
+Available post Moon Lord (post Providence and Ragnarok).
+-Added Ultimate Sephirothic Fruit. Provides one more minion slot and minions can do critical hit with 10% chance.
+Available post Moon Lord (post DoG and Ragnarok).
+-Added Supreme Rampage Components. Increases ranged damage and crit by additional 5% and increases armor penetration by 40.
+Available post Moon Lord (post DoG and Ragnarok).
+-Added Lilith Charm. Increased magic damage and crit by additional 5%, decreased mana usage by 10%, increased mana regen even more and bees now have low chance to heal you on enemy hit.
+Available post Moon Lord (post DoG and Ragnarok).
+-Added Pandora PF594 and PF666 forms. Work as special attacks.
+Using resets Pandora to PF422 form.
+-Added infinite variations for Seeping and Icedamned Arrow.
+-Added Living Shards to Operator's shop. Available after beating Golem.
+-Added Betsy Treasure Bag to Operator shop. Available after beating Old One's Army tier 3.
+-Added Ogre and Dark Mage Treasure Bags to Operator. 
+Avalilable after beating Old One's Army tier 1, 2 (only while Thorium mod is active).
+-Added support for Material Trader NPCs max HP boosts.
+-Added Informating Note. Available pre Skeletron. Has no usage.
+-Added some new sprites.
+-Reversity Coins now will only drop in Expert Worlds.
+-Now Laetitia set stats boosting through all vanilla progression.
+-Now consuming Autoinjector also gives permanent cooldown reduction of healing potions.
+-Now Thorium Combination only takes 4 slots instead of 10.
+-Flasks of Poison, Fire and Party are now available in Young Brewer's shop pre-hardmode.
+-Improved Akumu Shield. Now it reflects projectiles before they hitting the player.
+-Changed behavior for light pet in both forms.
+-Changed mechanics for Stormbreaker.
+-Changed prices for some materials.
+-Changed sprite for Wing of the World. Just place tile again to fix possible issues.
+-Polished mechanics for Akumu and Unchained Akumu.
+-Fixed rare crash with Thorium Combination.
+-Fixed Materia Transmutator recipe with Thorium and Content Disabler mods active.
+-Fixed tiles placement. Now they are not floating above for a little.
+-Fixed Quest fishes availability conditions (would only work after the next tModloader update).
+-Fixed hotkey translations.
+-Nerfed Crystal Dust Bullets.
+-Made Secret boss immune to Abyssal Shell.
+-Made Secret boss to instantly kill player if cheating.
+-Sorted some of the code.
+v7.3.1
+-Fixed Bandwidth error (I hope).
+-Added Dinasty Wood and Shingles to Architect.
+-Updated Ebony and Ivory sprite.
+v7.3
+-Added Ebony & Ivory, twin handguns. Available after beating Moon Lord.
+-Added fixed Quantum Destabilizer. 
+Does not consume any ammo, has a bit bigger damage output. Can be crafted.
+-Added Stormbreaker, post Moon Lord melee weapon, reference to Infinity War.
+Has 2 types of attack.
+-Added Pandora with more attacks unlocked. Can be crafted with Pandora PF422 and some other ingredients.
+Available post Providence with Calamity mod and post Ragnarok with Thorium Mod.
+-Added Dried Fish, unique Angel's quest reward. 
+Early hardmode true melee weapon.
+-Added Mutant Fish fishing quest with unique reward.
+Available after beating Wall of Flesh.
+-Added Moses Fish fishing quest with unique reward.
+Available after beating all Mechanical Bosses.
+-Added Solar/Nebula/Vortex/Stardust quest fishes with custom rewards. 
+Available after beating Lunatic Cultist.
+-Added Mini Shark quest fish with custom reward.
+Available anytime.
+-Added Manna from Heaven, unique Angler's quest reward.
+-Added Potion of Darkness, Revengeance exclusive potion.
+Fills Rage and causes Heart Attack for 5 minutes. Has 5 minutes cooldown. Available in hardmode.
+-Added support for Thorium Mod damage types boosts (except TRUE).
+Including combinations, both Autoinjectors, Memer's Riposte, Paradise Lost set bonus, Big Bird's Lamp, Ninja Potion and Hate Vial.
+-Added support for Mod of Redemption Druidic damage type boost. 
+Same ways of boost included.
+-Added new ability for Akumu. Now it makes shield which reflects projectiles while its owner has less than 25% HP.
+But this makes weapon deal only 50% of its damage.
+-Added Secret Note #2,3. 
+Obtainable through combining Torn Notes 4,5,6 and 7,8,9.
+-Now Notes book crafted through combining all 3 Secret Notes.
+-Added visual for Shield of Spring.
+-Fixed MP bugs with Otherworldly Portal.
+-Added missing texts on Russian, fixed some of existing ones.
+-Nerfed Pandora PF422.
+-Changed some condition for modded treasure bags.
+v.7.2.1
+-Hotfix for SpecialNPCLoot. Removed Astrum Deus coins drop.
+v7.2
+-Added Chinese translation by 抗药又坚硬汉化组 (SBMW GROUP). Thanks for your hard work!
+-Operator is now available with Content Disabler mod. She will not have EGOs shop.
+Her spawn condition would be the same (but she no longer requires Wing of the World in house).
+-Added config option for disabling the world entering message. Message also will disappear if Content Disabler mod is ON.
+-Added Trapper Potion. Empowers any traps. 
+Available after beating Golem.
+-Added abilities of Big Bird's Lamp to Twilight and Paradise Lost Leggings, Twilight and Paradise Lost Wings.
+-Added Kinetic Potion from Thorium in Brewer's 2nd shop. Available in hardmode.
+Also added to Thorium Combination.
+-Added Revivify Potion from Calamity in Brewer's 2nd shop. Available in hardmode.
+-Added Onyx from Thorium to Jeweler's shop. Available after beating EoW/BoC.
+-Added Count Echo's Treasure Bag to Operator.
+-Added Spear Trap to Jeweler's Arena shop.
+-Added infinite version of Crystal Dust Bullets and Crystalyzed Arrows.
+-Added Autoinjector MK2.
+-Calamity combination now only takes 1 buff slot.
+Makes you immune to buffs which it is contains.
+-Astrum Deus now actually drops Reversity Coins tier 3.
+-Fixed some problems with Treasure Bags shops of Operator.
+-Fixed recipe for Reversity Coins tier 3 (Calamity mod requirement).
+-Changed prices and conditions of some modded Treasure Bags.
+-Reworked National Ugandan Treasure. You will definetly like it :).
+-Nerfed some of EGO equipment.
+-Some secrets and easter eggs.
+v7.1
+-Added support for AlchemistNPC Content Disabler mod. Congratulations, dear content haters!
+-Autoinjector can now be consumed to give player permanent effect.
+Buffs will never wear off after death.
+-Added Materia Transmutator MK2. Functions as Materia Transmutator, but now also has functionality of Draedon's Forge.
+Can be crafted after beating DoG => Calamity Mod required.
+-Added Discord Potion. Allows to teleport to cursor position by using hotkey.
+Inflicts Distorted for 1 second. Deals damage, equal to 1/3 of total HP if using repeteadly and inflicts 10 seconds of Chaos State.
+Available after beating any mechanical boss.
+-Added True Discord Potion. Allows to teleport to cursor position by using hotkey.
+Behaves same as Rod of Discord. Can be bought from Explorer.
+-Added Thorium and Spirit Combinations. Can be bought from Young Brewer.
+Available after beating any mechanical boss and if respective mods are activated.
+-Added Paradise Lost EGO set, wings and weapon. Weapon has custom Pale damage type.
+Available after beating Moon Lord (no mods)/Ragnarok (Thorium)/Providence (Calamity).
+-Added Reality Piercer.
+-Added ability to disable Lilith's Emblem bees spawn by changing visibility of accessory.
+-Added Living Loom, Alchemy Table and Presserator to Architect's shops.
+-Added recipes for Stopwatch, DPS Meter and Lifeform Analyzer.
+-Materia Transmutator now also functions as Wing of the World, Crucible of Cosmos (Fargo's Mod), Thorium Anvil, Arcane Armor Fabricator and Soul Forge (Thorium Mod).
+-Watcher Amulet projectile no longer aims Target Dummies.
+-Ban Hammer now oneshots Dungeon Guardian.
+-Added new lines for Operator through global mods progression.
+-Tried to balance most weapons.
+-Fixed most of the MP issues (including Extractor and PG's set).
+-Fixed not saving mod's buffs after leaving the world.
+-Fixed Wing of the World not counted as light source.
+-Nerfed Blurring Potion.
+-Changed some mechanics.
+-Changed some descriptions.
+-Changed some prices and conditions.
+-Improved Russian localization. Now all texts should fit the screen.
+v7.0
+-Fixed MP bug with additional HP/Mana. Thanks to Dark;Light#2919 for help!
+-Added new NPC, Explorer. Sells some special potions and research notes.
+Available after beating Moon Lord. The way to spawn her is secret, so try to find the way. 
+Little advice - Torn Notes.
+-Added Explorer's Brew. Works like Explorer Combination, but have Sunshine effect instead of Shine, gives bigger mining speed bonus and your attacks can Electrocute enemies.
+Can be bought from Explorer.
+-Added config option to disable Torn Notes drop. Also changed config file name to Alchemistv7.json.
+-Reworked treasure bags shop of Operator. Now bags can be bought by special coins, which are dropping from bosses (can be disabled in config).
+Also, Treasure Bags shops were separated for modded and vanilla. Currently, have Thorium and Calamity mod support.
+-Boosted stats of vanilla town NPC in hardmode and post Moon Lord.
+They got +20 basic damage and +30 defense in hardmode.
+They got +250 max HP, 100 basic damage and +80 defense post Moon Lord. And some NPCs changes their weapons/projectiles.
+-Added Heart of Yui and Yui (Light Pet). Lights up treasures, creatures and traps.
+Drops from Treasure Bags in hardmode with 1:150 chance.
+-Added Nyx, ultimate Sniper Rifle. 
+Pierces through multiple enemies, every hit causes explosion.
+-Added Spear of Justice, another reference to 'Glitchtale' of some kind. Post ML throwing weapon.
+Has 2 attack types. One is exploding Red Spear. Another is a spread of homing Yellow Spears.
+-Added Fungalsphere, shroomite flamethrower. Deals massive damage to big group of enemies or Worm type bosses.
+Available post Lunatic Cultist.
+-Added XtraT, shroomite repeater. Shoots 2 arrows and energy bolt. Bolt deals triple weapon damage and pierces through enemies and tiles.
+Available post Lunatic Cultist.
+-Added Laoskadyn, powerful post Moon Lord sword. Shoots homing needles from the sky.
+Needles explode into flames on tyile/enemy impact.
+-Added Tritantrum, powerful post Moon Lord assault rifle. Shoots exploding Plasma Rounds.
+Ammo can be bought from Explorer, if you have TT in inventory.
+-Added Nyctosythia and Sunkrovera Arrows/Bullets. Post ML ammo.
+Nyctosythia ammo phases through walls and releases homing projectiles on enemy/wall impact.
+Sunkrovera ammo releases life stealing projectiles on enemy/wall impact.
+-Added Enchanced Shroomite Arrow/Bullet. Releases electric clouds on enemy/tile collide, which shooting shocking beams to enemies.
+Available post Moon Lord. 
+-Added Nyctosythia/Sunkrovera Crystals. Materials for new ammo. Post Lunatic Cultist materials.
+-Added Beach Teleporter Potion. Teleports you to Beach (near the leftest or rightest palm), side depends on used mouse button.
+Available after beating EoW/BoC in Alchemist shop.
+-Added Ocean Teleporter Potion. Teleports you to deep Ocean, side depends on used mouse button. 
+May be useful for Calamity (since there are no palms on sulphuric ocean).
+Available after beating Skeletron in Alchemist shop.
+-Added Drainer. Damages player by 250-400 HP each half of the second, then heals by 200. Also removes most of player's defense and endurance.
+Useful for gaining Rage. Available after beating Lunatic Cultist while you have Calamity mod ON.
+-Added much more stuff to Jeweler's Arena Shop.
+-Added Architect's Horcrux. Used for force re/spawn Architect.
+-Added Gills, Flippers and Water Walking potions effects to Explorer's Combination.
+-Added 6 more shops for Architect (with light sources).
+-Added Notes Book.
+-Added Sasscade Yo-Yo.
+-Added Magic Wand.
+-Added Quantum Destabilizer and Energy Cells.
+-Added Eye of Judgement.
+-Added Pandora PF422.
+-Added Akumu.
+-All Teleportation Potions now work in multiplayer (some warnings\esceptions CAN happen).
+-Fixed Wellcheers vending machine usage in MP.
+-Changed work mechanic of Rampage Components for a bit. Now turning off visibility of accessory turns off Sniper Scope effect instead of using it. 
+Now also improves power of Electrospheres.
+-Horcruxes now have a bit different mechanic of work. It spawn NPC nearby player now instead of off-screen.
+-Now Pink Guy Set is required to be equipped as player's main armor to make National Ugandan Treasure to drop (drop chance was increased to 25%).
+-Memer's Riposte now also cuts critical strike chance in half, but crits deals 4x damage.
+Also, now mirrors ANY damage (contact or projectile) taken multiplied by 5 to all enemies on screen.
+-Hate Vial can be consumed now. 
+Grants 15% bonus to all damage & crits, +20 life regeneration and heals for 150, but removes 15% endurance, 30 defense and inflicts potion sickness.
+-Wrath and Rage potions are now available in Brewer's 1st shop after beating Skeletron instead of in Hardmode.
+-Tweaked Underworld Teleportation Potion. Now you can choose side for teleportation by left-click or right-click.
+-Buffed Chloroshard Bullets for a bit.
+-Nerfed Ballistic Nebular Destroyer.
+-Nerfed Blurring Potion.
+-Lowered drop chances for developer sets (1:100) and pets (1:150).
+Sets now drops post Plantera.
+-Improved Young Brewer sprite.
+-Reworked recipes for Autoinjector and Watcher Amulet.
+-Fixed Lilith Emblem's bug in multiplayer.
+-Fixed Bast's Scroll armor destruction. Also added visual effect. Crafting recipe was nerfed too.
+-Replaced Flesh Grinder to Meat Grinder in Architect's 4th shop.
+-Removed Ancient Manipulator craftabilities from Special Crafting Point.
+-Removed Battle Potion effect from Summoner and Universal Combinations.
+-Wing of the World now counts as table, chair and light source.
+-Fixed Alchemist sprite.
+-Fixed some typos with the help of Slap it Now#1939.
+v.6.9.1
+-To prevent confusion with beta update.
+v6.9
+-Added Determination Blade (yes, this is Glitchtale reference).
+Extractor, soul essence and hate vial are added as well for crafting DT Blade.
+Available post ML.
+-Added Enchanted Mirror. Remembers last recall position.
+Available in early Hardmode. Requires Magic Mirror, Beacon and some other stuff.
+-Added Chromatic Crystal. Post ML material.
+-Added Chromovaria Bullet/Arrow. Heavy damaging post ML bullet/arrow.
+Require Chromatic Crystal as material.
+-Added Underworld Teleportation Potion. Teleports player to rightest Obsidian Tower.
+Available after beating WoF.
+-Added NON-CALAMITY BUFF POTION tooltip to AlchemistNPC buff potions.
+-Added 3 more potions from Sacred Tools. 
+Available as certain ST bosses are defeated.
+-Added Meat Grinder to Architect's 4th shop.
+Some prices tweaks too.
+-Lowered chances of dropping dev items from Treasure Bags.
+-Moved Tremor potions to Brewer's 4th shop.
+-Fixed Tremor shop of Alchemist.
+-Nerfed Reverberation Repeater (had too big DPS before).
+-Nerfed set bonus of Reverberation (not longer removes manacost, leaf shield lowers damage by 15% now).
+-Fixed MP part of Life Elixir and Fuaran.
+-Fixed strange behavior of Crystalyzed Arrow.
+-Changed sprites of Builder and Fishing Combinations, Crystalyzed Arrow.
+-Fixed some typos.
 v6.8
 -Updated sprites for both Tank combinations, Ranger, Summoner, Mage and Explorer combinations.
 -Updated sprite for Crystal Dust bullet/material, Beacon Teleporter Potion.

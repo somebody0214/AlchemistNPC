@@ -7,6 +7,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.ModLoader.IO;
 using Terraria.GameInput;
 using Terraria.Localization;
@@ -17,14 +18,15 @@ namespace AlchemistNPC.Buffs
 	{
 		public override void SetDefaults()
 		{
-			DisplayName.SetDefault("Onyx Soda Effect");
+			DisplayName.SetDefault("Onyx Soda");
 			Description.SetDefault("Increases endurance by 75%");
-			Main.buffNoSave[Type] = true;
 			Main.debuff[Type] = false;
 			canBeCleared = true;
-			DisplayName.AddTranslation(GameCulture.Russian, "Эффект Ониксовой Соды");
-			Description.AddTranslation(GameCulture.Russian, "Увеличивает вашу стойкость на 75%"); 
-		}
+			DisplayName.AddTranslation(GameCulture.Russian, "Ониксовая Сода");
+			Description.AddTranslation(GameCulture.Russian, "Увеличивает вашу стойкость на 75%");
+            DisplayName.AddTranslation(GameCulture.Chinese, "玛瑙苏打加持");
+            Description.AddTranslation(GameCulture.Chinese, "增加75%耐力");
+        }
 		
 		public override void Update(Player player, ref int buffIndex)
 		{

@@ -1,10 +1,12 @@
 using System;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.Enums;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.ObjectData;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,17 +22,19 @@ namespace AlchemistNPC.Tiles
 			Main.tileNoAttach[Type] = true;
 			Main.tileLavaDeath[Type] = true;
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style3x4);
-			TileObjectData.newTile.CoordinateHeights = new int[]{ 16, 16, 16, 16 };
+			TileObjectData.newTile.CoordinateHeights = new int[]{ 16, 16, 16, 18 };
 			TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
 			TileObjectData.addTile(Type);
 			ModTranslation name = CreateMapEntryName();
 			name.SetDefault("Materia Transmutator");
 			name.AddTranslation(GameCulture.Russian, "Преобразователь Материи");
-			AddMapEntry(new Color(200, 200, 200), name);
+            name.AddTranslation(GameCulture.Chinese, "物质嬗变器");
+            AddMapEntry(new Color(200, 200, 200), name);
 			disableSmartCursor = true;
 			adjTiles = new int[]
 			{
+			mod.TileType("WingoftheWorld"),
 			TileID.WorkBenches, 
 			TileID.Anvils, 
 			TileID.Furnaces, 
@@ -68,8 +72,20 @@ namespace AlchemistNPC.Tiles
 			TileID.AlchemyTable,
 			TileID.LunarCraftingStation
 			};
+			if (ModLoader.GetMod("ThoriumMod") != null)
+				{
+                Array.Resize(ref adjTiles, adjTiles.Length + 3);
+                adjTiles[adjTiles.Length - 1] = ModLoader.GetMod("ThoriumMod").TileType("ThoriumAnvil");
+                adjTiles[adjTiles.Length - 2] = ModLoader.GetMod("ThoriumMod").TileType("ArcaneArmorFabricator");
+                adjTiles[adjTiles.Length - 3] = ModLoader.GetMod("ThoriumMod").TileType("SoulForge");
+				}
+			if (ModLoader.GetMod("FargowiltasSouls") != null)
+				{
+				Array.Resize(ref adjTiles, adjTiles.Length + 1);
+                adjTiles[adjTiles.Length - 1] = ModLoader.GetMod("FargowiltasSouls").TileType("CrucibleCosmosSheet");
+				}
 			dustType = mod.DustType("JustitiaPale");
-			animationFrameHeight = 72;
+			animationFrameHeight = 74;
 		}
 		
 		public override void NumDust(int i, int j, bool fail, ref int num)
@@ -97,6 +113,12 @@ namespace AlchemistNPC.Tiles
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
 			Item.NewItem(i * 16, j * 16, 16, 32, mod.ItemType("MateriaTransmutator"));
+		}
+		
+		public override void NearbyEffects(int i, int j, bool closer)
+        {
+            Player player = Main.player[Main.myPlayer];
+            player.alchemyTable = true;
 		}
 	}
 }

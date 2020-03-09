@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
  
 namespace AlchemistNPC.Items
@@ -16,8 +17,11 @@ namespace AlchemistNPC.Items
 			DisplayName.SetDefault("Fortitude Potion");
 			Tooltip.SetDefault("Grants immunity to knockback");
 			DisplayName.AddTranslation(GameCulture.Russian, "Зелье Стойкости");
-			Tooltip.AddTranslation(GameCulture.Russian, "Даёт иммунитет к отбрасыванию"); 
-		}    
+			Tooltip.AddTranslation(GameCulture.Russian, "Даёт иммунитет к отбрасыванию");
+
+            DisplayName.AddTranslation(GameCulture.Chinese, "刚毅药剂");
+            Tooltip.AddTranslation(GameCulture.Chinese, "免疫击退");
+        }    
 		public override void SetDefaults()
         {
             item.UseSound = SoundID.Item3;                 //this is the sound that plays when you use the item

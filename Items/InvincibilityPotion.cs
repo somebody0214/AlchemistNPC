@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
  
 namespace AlchemistNPC.Items
@@ -16,8 +17,11 @@ namespace AlchemistNPC.Items
 			DisplayName.SetDefault("Invincibility Potion");
 			Tooltip.SetDefault("Increases length of invincibility after taking damage");
 			DisplayName.AddTranslation(GameCulture.Russian, "Зелье Неуязвимости");
-			Tooltip.AddTranslation(GameCulture.Russian, "Увеличивает период неуязвимости после получения урона"); 
-		}    
+			Tooltip.AddTranslation(GameCulture.Russian, "Увеличивает период неуязвимости после получения урона");
+
+            DisplayName.AddTranslation(GameCulture.Chinese, "无敌药剂");
+            Tooltip.AddTranslation(GameCulture.Chinese, "延长受伤后的无敌时间");
+        }    
 		public override void SetDefaults()
         {
             item.UseSound = SoundID.Item3;                 //this is the sound that plays when you use the item

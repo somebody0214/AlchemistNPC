@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
 
 namespace AlchemistNPC.Items.Armor
@@ -20,15 +21,19 @@ namespace AlchemistNPC.Items.Armor
 			+ "\n[c/FF0000:EGO armor piece]"
 			+ "\nIncreases summon damage by 5%"
 			+ "\nDefense grows stronger when certain bosses are killed"
-			+ "\nArmor's current defense will be shown in inventory");
-			Tooltip.AddTranslation(GameCulture.Russian, "Ленточка на плаще отражает мольбу дитя о счастье. Дитя, что не может покинуть своих друзей.\n[c/FF0000:Э.П.О.С часть брони]\nУвеличивает урон прислужников на 5%\nЗащита брони увеличивается после победы над определённым боссами\nТекущая защита брони будет показана в инвентаре");
-		
-		ModTranslation text = mod.CreateTranslation("LaetitiaSetBonus");
-		text.SetDefault("Allows to summon Little Witch Monster from the Gift"
-		+ "\nMinion damage grows stronger by additional 35% in Hardmode"
-		+ "\nDoubles speed of Laetitia Rifle");
-		text.AddTranslation(GameCulture.Russian, "Позволяет призвать Монстра Маленькой Ведьмы из Дара.\nУрон прислужников дополнительно увеличивается на 35% в Хардмоде.");
-		mod.AddTranslation(text);
+			+ "\nArmor's base defense is 3");
+            Tooltip.AddTranslation(GameCulture.Russian, "Ленточка на плаще отражает мольбу дитя о счастье. Дитя, что не могло покинуть своих друзей.\n[c/FF0000:Часть брони Э.П.О.С.]\nУвеличивает урон прислужников на 5%\nЗащита увеличивается после убийства определенных боссов\nБазовая защита равна 3");
+
+            DisplayName.AddTranslation(GameCulture.Chinese, "蕾蒂希娅缎带 (O-01-67)");
+            Tooltip.AddTranslation(GameCulture.Chinese, "'外套上精美的丝带和蝴蝶结寄托着少女对幸福的向往, 一个孩子不能离开朋友.'\n[c/FF0000:EGO 盔甲]\n增加5%召唤物伤害\n击败特定Boss之后增加防御力\n基础防御为3");
+
+            ModTranslation text = mod.CreateTranslation("LaetitiaSetBonus");
+		    text.SetDefault("Allows to summon Little Witch Monster from the Gift"
+		    + "\nMinion damage grows stronger by additional 25% in Hardmode"
+		    + "\nDoubles speed of Laetitia Rifle");
+            text.AddTranslation(GameCulture.Russian, "Позволяет призвать Монстра Маленькой Ведьмы из Дара.\nУрон прислужников дополнительно увеличивается на 25% в Хардмоде.\nУдваивает скорость атаки Винтовки Летиции");
+            text.AddTranslation(GameCulture.Chinese, "允许召唤来自礼物的小巫怪\n肉后增加25%召唤伤害\n蕾蒂希娅来复枪射速加倍");
+            mod.AddTranslation(text);
 		}
 		
 		public override void SetDefaults()
@@ -37,7 +42,7 @@ namespace AlchemistNPC.Items.Armor
 			item.height = 18;
 			item.value = 100000;
 			item.rare = 7;
-			item.defense = ad;
+			item.defense = 3;
 		}
 
 		public override bool IsArmorSet(Item head, Item body, Item legs)
@@ -49,13 +54,17 @@ namespace AlchemistNPC.Items.Armor
 		{
 			string LaetitiaSetBonus = Language.GetTextValue("Mods.AlchemistNPC.LaetitiaSetBonus");
 			player.setBonus = LaetitiaSetBonus;
-			AlchemistNPC.LaetitiaSet = true;
 			if (Main.hardMode)
 			{
-			player.minionDamage += 0.35f;
+			player.minionDamage += 0.25f;
 			}
-			player.GetModPlayer<AlchemistNPCPlayer>(mod).jr = true;
-		}
+			if (NPC.downedPlantBoss)
+			{
+			player.SporeSac();
+            player.sporeSac = true;
+			}
+            player.GetModPlayer<AlchemistNPCPlayer>().LaetitiaSet = true;
+        }
 
 		public override void DrawHair(ref bool drawHair, ref bool drawAltHair)
 		{
@@ -67,36 +76,98 @@ namespace AlchemistNPC.Items.Armor
 			player.minionDamage += 0.05f;
 			item.defense = ad;
 			ad = 3;
-			if (NPC.downedBoss3 && !Main.hardMode)
+			if (NPC.downedQueenBee)
 			{
-			ad = 5;
+				ad = 4;
 			}
-			if (Main.hardMode && !NPC.downedMechBossAny)
+			if (NPC.downedBoss3)
 			{
-			ad = 8;
+				ad = 5;
+			}
+			if (Main.hardMode)
+			{
+				ad = 8;
 			}
 			if (NPC.downedMechBossAny)
 			{
-			ad = 12;
+				ad = 10;
+			}
+			if (NPC.downedMechBoss1 && NPC.downedMechBoss2 && NPC.downedMechBoss3)
+			{
+				ad = 12;
+			}
+			if (NPC.downedPlantBoss)
+			{
+				ad = 14;
+			}
+			if (NPC.downedGolemBoss)
+			{
+				ad = 16;
+			}
+			if (NPC.downedFishron)
+			{
+				ad = 18;
+			}
+			if (NPC.downedAncientCultist)
+			{
+				ad = 19;
+			}
+			if (NPC.downedMoonlord)
+			{
+				ad = 22;
 			}
 		}
 		
-		public override void UpdateInventory(Player player)
+		public override void ModifyTooltips(List<TooltipLine> tooltips)
 		{
-		item.defense = ad;
-		ad = 3;
-		if (NPC.downedBoss3 && !Main.hardMode)
+			Player player = Main.player[Main.myPlayer];
+			item.defense = ad;
+			ad = 3;
+			if (NPC.downedQueenBee)
 			{
-			ad = 5;
+				ad = 4;
 			}
-		if (Main.hardMode && !NPC.downedMechBossAny)
+			if (NPC.downedBoss3)
 			{
-			ad = 8;
+				ad = 5;
 			}
-		if (NPC.downedMechBossAny)
+			if (Main.hardMode)
 			{
-			ad = 12;
+				ad = 8;
 			}
+			if (NPC.downedMechBossAny)
+			{
+				ad = 10;
+			}
+			if (NPC.downedMechBoss1 && NPC.downedMechBoss2 && NPC.downedMechBoss3)
+			{
+				ad = 12;
+			}
+			if (NPC.downedPlantBoss)
+			{
+				ad = 14;
+			}
+			if (NPC.downedGolemBoss)
+			{
+				ad = 16;
+			}
+			if (NPC.downedFishron)
+			{
+				ad = 18;
+			}
+			if (NPC.downedAncientCultist)
+			{
+				ad = 19;
+			}
+			if (NPC.downedMoonlord)
+			{
+				ad = 22;
+			}
+			string text1 = ad + " defense";
+			TooltipLine line = new TooltipLine(mod, "text1", text1);
+			line.overrideColor = Color.White;
+			tooltips.RemoveAt(2);
+			tooltips.Insert(2,line);
 		}
 		
 		public override void AddRecipes()

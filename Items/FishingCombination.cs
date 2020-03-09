@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
  
 namespace AlchemistNPC.Items
@@ -16,8 +17,11 @@ namespace AlchemistNPC.Items
 			DisplayName.SetDefault("Fishing Combination");
 			Tooltip.SetDefault("Grants Crate, Sonar, Fishing, Regeneration, Thorns, Iron Skin, Calming & Inferno buffs");
 			DisplayName.AddTranslation(GameCulture.Russian, "Комбинация Рыбака");
-			Tooltip.AddTranslation(GameCulture.Russian, "Даёт баффы Ящиков, Сонара, Рыбалки, Регенерации, Шипов, Железной Кожи, Покоя и Инферно"); 
-		}    
+            Tooltip.AddTranslation(GameCulture.Russian, "Даёт баффы Ящиков, Сонара, Рыбалки, Регенерации, Шипов, Железной Кожи, Покоя и Инферно");
+
+            DisplayName.AddTranslation(GameCulture.Chinese, "钓鱼药剂包");
+            Tooltip.AddTranslation(GameCulture.Chinese, "获得板条箱, 声呐, 钓鱼, 再生, 荆棘, 铁皮, 心如止水, 熔岩领域Buff");
+        }    
 		public override void SetDefaults()
         {
             item.UseSound = SoundID.Item44;                 //this is the sound that plays when you use the item

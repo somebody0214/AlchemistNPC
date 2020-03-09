@@ -1,6 +1,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
 
 namespace AlchemistNPC.Items.Weapons
@@ -12,8 +13,11 @@ namespace AlchemistNPC.Items.Weapons
 			DisplayName.SetDefault("Corrosive Flask");
 			Tooltip.SetDefault("Toxic Flask, improved by Celestial Powers.");
 			DisplayName.AddTranslation(GameCulture.Russian, "Колба Коррозии");
-			Tooltip.AddTranslation(GameCulture.Russian, "Колба с токсинами, улучшенная Небесными Силами"); 
-		}    
+            Tooltip.AddTranslation(GameCulture.Russian, "Колба с токсинами, улучшенная Небесными Силами");
+
+            DisplayName.AddTranslation(GameCulture.Chinese, "腐蚀烧瓶");
+            Tooltip.AddTranslation(GameCulture.Chinese, "被炼金师加强过的剧毒药水");
+        }    
 		public override void SetDefaults()
 		{
 			item.damage = 175;

@@ -1,6 +1,8 @@
 using Terraria;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
+using Microsoft.Xna.Framework;
 
 namespace AlchemistNPC.Buffs
 {
@@ -9,24 +11,24 @@ namespace AlchemistNPC.Buffs
 		public override void SetDefaults()
 		{
 			DisplayName.SetDefault("Little Witch Monster");
-			Description.SetDefault("So that's what it contains...");
+			Description.SetDefault("So that's what it contained...");
 			Main.buffNoSave[Type] = true;
 			Main.buffNoTimeDisplay[Type] = true;
 			DisplayName.AddTranslation(GameCulture.Russian, "Монстр Маленькой Ведьмы");
-			Description.AddTranslation(GameCulture.Russian, "Так вот что было внутри..."); 
-		}
+			Description.AddTranslation(GameCulture.Russian, "Так вот что было внутри...");
+            DisplayName.AddTranslation(GameCulture.Chinese, "小巫怪");
+            Description.AddTranslation(GameCulture.Chinese, "嗯，这就是它里面的东西...");
+        }
 
 		public override void Update(Player player, ref int buffIndex)
 		{
-			AlchemistNPCPlayer modPlayer = player.GetModPlayer<AlchemistNPCPlayer>(mod);
-			if (player.ownedProjectileCounts[mod.ProjectileType("LittleWitchMonster")] > 0)
+			AlchemistNPCPlayer modPlayer = player.GetModPlayer<AlchemistNPCPlayer>();
+			if (player.ownedProjectileCounts[mod.ProjectileType("LittleWitchMonster")] < 1)
 			{
+				Vector2 vel = new Vector2(0, -1);
+				vel *= 0f;
+				Projectile.NewProjectile(player.position.X-15, player.position.Y, vel.X, vel.Y, mod.ProjectileType("LittleWitchMonster"), 24, 3f, player.whoAmI);
 				modPlayer.lwm = true;
-			}
-			if (!modPlayer.lwm)
-			{
-				player.DelBuff(buffIndex);
-				buffIndex--;
 			}
 			else
 			{

@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using AlchemistNPC.Projectiles;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
 
 namespace AlchemistNPC.Items.Weapons
@@ -12,14 +13,17 @@ namespace AlchemistNPC.Items.Weapons
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Spore (O-04-66)");
-			Tooltip.SetDefault("The spear, covered with spores and attention."
-			+ "\nIt expands mind, shines like a star and gradually becomes closer to weilder."
+			Tooltip.SetDefault("''The spear, covered with spores and attention."
+			+ "\nIt expands mind, shines like a star and gradually becomes closer to weilder.''"
 			+ "\n[c/FF0000:EGO weapon]"
 			+ "\nIts attack hits enemy several times"
 			+ "\nAfter certain amount of hits releases damaging spores into enemy");
 			DisplayName.AddTranslation(GameCulture.Russian, "Спора (O-04-66)");
-			Tooltip.AddTranslation(GameCulture.Russian, "Копьё, покрытое спорами и вниманием.\nОно раскрывает разум, сияет словно звезда и постепенно сближается с носителем.\n[c/FF0000:Э.П.О.С. оружие]\nЕго атаки наносят урон противнику несколько раз\nПри нанесении определённого количество ударов выпускает атакующие споры во врага"); 
-		}
+            Tooltip.AddTranslation(GameCulture.Russian, "Копьё, покрытое спорами и вниманием.\nОно раскрывает разум, сияет словно звезда и постепенно сближается с носителем.\n[c/FF0000:Оружие Э.П.О.С.]\nЕго атаки наносят урон противнику несколько раз\nПри нанесении определённого количество ударов выпускает атакующие споры во врага");
+
+            DisplayName.AddTranslation(GameCulture.Chinese, "荧光菌孢 (O-04-66)");
+            Tooltip.AddTranslation(GameCulture.Chinese, "'这是一支生长着孢子, 并且寄宿着情感的长矛.'\n'它能够揭示思维, 在他们脑海中如同繁星一般闪烁, 并且使他们逐渐变得驯服安分.'\n[c/FF0000:EGO 武器]\n攻击能多次伤害敌人\n在命中一定次数之后释放伤害性孢子进入敌人体内");
+        }
 
 		public override void SetDefaults()
 		{
@@ -28,7 +32,7 @@ namespace AlchemistNPC.Items.Weapons
 			item.useAnimation = 20;
 			item.useTime = 25;
 			item.shootSpeed = 3.7f;
-			item.knockBack = 6.5f;
+			item.knockBack = 6;
 			item.width = 32;
 			item.height = 32;
 			item.scale = 1f;
@@ -57,7 +61,14 @@ namespace AlchemistNPC.Items.Weapons
 		
 		public override bool CanUseItem(Player player)
 		{
-			// Ensures no more than one spear can be thrown out, use this when using autoReuse
+			if (((AlchemistNPCPlayer)player.GetModPlayer(mod, "AlchemistNPCPlayer")).ParadiseLost == true)
+					{
+					item.damage = 250;
+					}
+					else
+					{
+					item.damage = 55;
+					}
 			return player.ownedProjectileCounts[item.shoot] < 1; 
 		}
 	}

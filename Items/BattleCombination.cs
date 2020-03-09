@@ -5,19 +5,23 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
  
 namespace AlchemistNPC.Items
 {
-     public class BattleCombination : ModItem
+    public class BattleCombination : ModItem
     {
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Battle Combination");
 			Tooltip.SetDefault("Grants buffs, which are necessary for battle (Endurance, Lifeforce, Ironskin, Regeneration, Rage & Wrath)");
 			DisplayName.AddTranslation(GameCulture.Russian, "Боевая Комбинация");
-			Tooltip.AddTranslation(GameCulture.Russian, "Даёт баффы, важные для битв (Выносливость, Жизненные Силы, Железная Кожа, Регенерация, Ярость и Гнев)"); 
-		}    
+            Tooltip.AddTranslation(GameCulture.Russian, "Даёт баффы, важные для битв (Выносливость, Жизненные Силы, Железная Кожа, Регенерация, Ярость и Гнев)");
+
+            DisplayName.AddTranslation(GameCulture.Chinese, "战斗药剂包");
+            Tooltip.AddTranslation(GameCulture.Chinese, "获得你在战斗时需要的Buff(耐力, 生命力, 铁皮, 恢复, 暴怒, 怒气)");
+        }    
 		public override void SetDefaults()
         {
             item.UseSound = SoundID.Item3;                 //this is the sound that plays when you use the item

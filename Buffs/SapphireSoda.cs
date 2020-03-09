@@ -7,6 +7,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.ModLoader.IO;
 using Terraria.GameInput;
 using Terraria.Localization;
@@ -17,14 +18,15 @@ namespace AlchemistNPC.Buffs
 	{
 		public override void SetDefaults()
 		{
-			DisplayName.SetDefault("Sapphire Soda Effect");
+			DisplayName.SetDefault("Sapphire Soda");
 			Description.SetDefault("Removes Mana Sickness debuff");
-			Main.buffNoSave[Type] = true;
 			Main.debuff[Type] = false;
 			canBeCleared = true;
-			DisplayName.AddTranslation(GameCulture.Russian, "Эффект Сапфировой Соды");
-			Description.AddTranslation(GameCulture.Russian, "Убирает дебафф Ослабление Волшебства"); 
-		}
+			DisplayName.AddTranslation(GameCulture.Russian, "Сапфировая Сода");
+			Description.AddTranslation(GameCulture.Russian, "Убирает дебафф Ослабление Волшебства");
+            DisplayName.AddTranslation(GameCulture.Chinese, "宝蓝苏打加持");
+            Description.AddTranslation(GameCulture.Chinese, "移除魔力病Debuff");
+        }
 		
 		public override void Update(Player player, ref int buffIndex)
 		{

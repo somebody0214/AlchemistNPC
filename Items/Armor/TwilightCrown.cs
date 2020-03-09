@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
 
 namespace AlchemistNPC.Items.Armor
@@ -15,16 +16,21 @@ namespace AlchemistNPC.Items.Armor
 		{
 			DisplayName.SetDefault("Twilight Crown (O-02-63)");
 			DisplayName.AddTranslation(GameCulture.Russian, "Сумеречная Корона (O-02-63)"); 
-			Tooltip.SetDefault("'Efforts of three birds to defeat the beast became one."
-			+ "\nIt could stop countless incidents but you’d have to be prepared to step into the Black Forest.'"
+			Tooltip.SetDefault("''Efforts of three birds to defeat the beast became one."
+			+ "\nIt could stop countless incidents but you’d have to be prepared to step into the Black Forest.''"
 			+ "\n[c/FF0000:EGO armor piece]"
 			+ "\nIncreases melee speed by 30%");
-			Tooltip.AddTranslation(GameCulture.Russian, "Усилия трёх птиц, чтобы одолеть Зверя, став едиными.\nОно способно остановить бесчисленные несчастные случаи.\nНо вам нужно быть готовыми, чтобы войти в Тёмный Лес.\n[c/FF0000:Э.П.О.С часть брони]\nУвеличивает скорость атак в ближнем бою 30%");
-		ModTranslation text = mod.CreateTranslation("TwilightSetBonus");
-		text.SetDefault("Increases current melee/magic damage by 30% and adds 15% to melee/magic critical strike chance"
-		+ "\nIncludes all bonuses from Big Bird Lamp");
-		text.AddTranslation(GameCulture.Russian, "Увеличивает текущий урон в ближнем бою/магический на 30% и добаляет 15% к шансу критического удара\nВключает в себя бонусы от Лампы Большой Птицы");
-		mod.AddTranslation(text);
+
+            DisplayName.AddTranslation(GameCulture.Chinese, "薄暝王冠 (O-02-63)");
+            Tooltip.AddTranslation(GameCulture.Chinese, "'为了击退黑森林里的可怕“怪物”, 三只鸟齐心协力, 合为一体.'\n'它能避免很多无辜的人遇害, 但在那之前, 你必须做好万无一失的准备, 去踏入那片黑暗而又绝望的森林.'\n[c/FF0000:EGO 盔甲]\n增加30%近战伤害");
+
+            Tooltip.AddTranslation(GameCulture.Russian, "''Усилия трёх птиц, чтобы одолеть Зверя, стали едиными.\nОно способно остановить бесчисленные несчастные случаи.\nНо вам нужно быть готовыми, чтобы войти в Тёмный Лес.''\n[c/FF0000:Часть брони Э.П.О.С.]\nУвеличивает скорость ближнего боя на 30%");
+		    ModTranslation text = mod.CreateTranslation("TwilightSetBonus");
+		    text.SetDefault("Increases current melee/magic damage by 30% and adds 15% to melee/magic critical strike chance"
+		    + "\nIncludes all bonuses from Big Bird Lamp");
+            text.AddTranslation(GameCulture.Russian, "Увеличивает текущий урон в ближнем бою/магический на 30% и добаляет 15% к шансу критического удара\nВключает в себя бонусы от Лампы Большой Птицы");
+            text.AddTranslation(GameCulture.Chinese, "增加30%当前近战/魔法伤害, 并增加15%近战/魔法暴击率\n包含大鸟灯的全部效果");
+            mod.AddTranslation(text);
 		}
 
 		public override void SetDefaults()
@@ -38,20 +44,25 @@ namespace AlchemistNPC.Items.Armor
 
 		public override void UpdateEquip(Player player)
 		{
-			player.meleeSpeed *= 1.30f;
+			player.meleeSpeed += 0.30f;
 		}
 		
 		public override bool IsArmorSet(Item head, Item body, Item legs)
 		{
 			return body.type == mod.ItemType("TwilightSuit") && legs.type == mod.ItemType("TwilightLeggings");
 		}
+		
+		public override void DrawHair(ref bool drawHair, ref bool drawAltHair)
+		{
+			drawAltHair = true;
+		}
 
 		public override void UpdateArmorSet(Player player)
 		{
 			string TwilightSetBonus = Language.GetTextValue("Mods.AlchemistNPC.TwilightSetBonus");
 			player.setBonus = TwilightSetBonus;
-			player.meleeDamage *= 1.35f;
-			player.magicDamage *= 1.35f;
+			player.meleeDamage += 0.35f;
+			player.magicDamage += 0.35f;
 			player.meleeCrit += 20;
 			player.magicCrit += 20;
 			player.AddBuff(mod.BuffType("BigBirdLamp"), 300);

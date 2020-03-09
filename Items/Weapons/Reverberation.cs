@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
 
 namespace AlchemistNPC.Items.Weapons
@@ -17,8 +18,11 @@ namespace AlchemistNPC.Items.Weapons
 			+ "\nProjectile deals same damage is main, but consumes 15 mana each"
 			+ "\nCan be powered up by equipping full 'Reverberation' set");
 			DisplayName.AddTranslation(GameCulture.Russian, "Реверберация (T-04-53)");
-			Tooltip.AddTranslation(GameCulture.Russian, "Это оружие будет более не нужно, если придёт время когда всеобщая похоть заменится цветами\n[c/FF0000:Э.П.О.С. оружие]\n50% шанс выстрелить дополнительным снарядом, проходящим сквозь блоки\nУрон этого снаряда будет равен урону основного, но будет расходоваться по 15 маны за каждый\nМожет быть усилен, если экипировать полный сет 'Реверберация'");
-		}
+            Tooltip.AddTranslation(GameCulture.Russian, "Это оружие не будет нужно, если придёт время, когда всеобщая похоть заменится цветами\n[c/FF0000:Оружие Э.П.О.С.]\n50% шанс выстрелить дополнительным снарядом, проходящим сквозь блоки\nУрон этого снаряда будет равен урону основного, но на каждый такой снаряд требуется 15 маны\nМожет быть усилен, если экипировать полный сет 'Реверберация'");
+
+            DisplayName.AddTranslation(GameCulture.Chinese, "余香 (T-04-53)");
+            Tooltip.AddTranslation(GameCulture.Chinese, "'或许, 当每个人内心的欲望都被花朵取代后, 就不再需要这把武器了吧?'\n[c/FF0000:EGO 武器]\n有50％的几率可以射出额外的子弹\n子弹造成同样的伤害，但是每个需要消耗15点法力\n身着全套'余香'可提升伤害");
+        }
 
 		public override void SetDefaults()
 		{
@@ -26,8 +30,8 @@ namespace AlchemistNPC.Items.Weapons
 			item.ranged = true;
 			item.width = 40;
 			item.height = 20;
-			item.useTime = 10;
-			item.useAnimation = 10;
+			item.useTime = 15;
+			item.useAnimation = 15;
 			item.useStyle = 5;
 			item.noMelee = true; //so the item's animation doesn't do damage
 			item.knockBack = 8;
@@ -54,16 +58,20 @@ namespace AlchemistNPC.Items.Weapons
 
 		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
 		{
-			if (AlchemistNPC.RevSet)
+			if (((AlchemistNPCPlayer)player.GetModPlayer(mod, "AlchemistNPCPlayer")).RevSet == true || (((AlchemistNPCPlayer)player.GetModPlayer(mod, "AlchemistNPCPlayer")).ParadiseLost == true))
 				{
-				int numberProjectiles = 2 + Main.rand.Next(3);
-				for (int i = 0; i < numberProjectiles; i++)
+					if (player.statMana >= 30)
 					{
-					Vector2 perturbedSpeed = new Vector2(speedX, speedY).RotatedByRandom(MathHelper.ToRadians(20));
-					Projectile.NewProjectile(position.X, position.Y, perturbedSpeed.X, perturbedSpeed.Y, ProjectileID.CrystalLeafShot, damage/2, knockBack, player.whoAmI);
+					int numberProjectiles = 2 + Main.rand.Next(3);
+					for (int i = 0; i < numberProjectiles; i++)
+						{
+						Vector2 perturbedSpeed = new Vector2(speedX, speedY).RotatedByRandom(MathHelper.ToRadians(20));
+						Projectile.NewProjectile(position.X, position.Y, perturbedSpeed.X, perturbedSpeed.Y, ProjectileID.CrystalLeafShot, damage/2, knockBack, player.whoAmI);
+						player.statMana -= 4;
+						}
 					}
 				}
-			if (!AlchemistNPC.RevSet)
+			if (((AlchemistNPCPlayer)player.GetModPlayer(mod, "AlchemistNPCPlayer")).RevSet == false)
 				{
 					if (Main.rand.Next(2) == 0 && player.statMana >= 30)
 						{
@@ -72,6 +80,23 @@ namespace AlchemistNPC.Items.Weapons
 						}
 				}
 			return true;
+		}
+		
+		public override bool CanUseItem(Player player)
+		{
+			if (((AlchemistNPCPlayer)player.GetModPlayer(mod, "AlchemistNPCPlayer")).ParadiseLost == true)
+					{
+					item.damage = 120;
+					item.useTime = 10;
+					item.useAnimation = 10;
+					}
+					else
+					{
+					item.damage = 40;
+					item.useTime = 15;
+					item.useAnimation = 15;
+					}
+			return base.CanUseItem(player);
 		}
 	}
 }

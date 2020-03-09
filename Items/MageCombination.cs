@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
  
 namespace AlchemistNPC.Items
@@ -14,10 +15,13 @@ namespace AlchemistNPC.Items
         public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Mage Combination");
-			Tooltip.SetDefault("Grants buffs, which are necesary for Mages (Magic Power, Mana Regeneration, Wrath, Rage)");
+			Tooltip.SetDefault("Grants buffs, which are necesary for Mages (Magic Power, Mana Regeneration, Сlairvoyance, Wrath, Rage)");
 			DisplayName.AddTranslation(GameCulture.Russian, "Комбинация Мага");
-			Tooltip.AddTranslation(GameCulture.Russian, "Даёт баффы, важные для Магов (Магическая Сила, Регенерация Маны, Гнев и Ярость)"); 
-		}    
+            Tooltip.AddTranslation(GameCulture.Russian, "Даёт баффы, важные для Магов (Магическая Сила, Регенерация Маны, Ясновидение, Гнев, Ярость)");
+
+            DisplayName.AddTranslation(GameCulture.Chinese, "魔法药剂包");
+            Tooltip.AddTranslation(GameCulture.Chinese, "获得一些魔法buff(魔能, 法力再生, 智慧, 暴怒, 怒气)");
+        }    
 		public override void SetDefaults()
         {
             item.UseSound = SoundID.Item3;                 //this is the sound that plays when you use the item

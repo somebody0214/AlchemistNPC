@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
  
 namespace AlchemistNPC.Items
@@ -16,8 +17,11 @@ namespace AlchemistNPC.Items
 			DisplayName.SetDefault("Bewitching Potion");
 			Tooltip.SetDefault("Grants Bewitched buff (increases max number of minions)");
 			DisplayName.AddTranslation(GameCulture.Russian, "Зелье Колдовства");
-			Tooltip.AddTranslation(GameCulture.Russian, "Даёт бафф Колдовства (увеличивает максимальное число прислужников)"); 
-		}    
+			Tooltip.AddTranslation(GameCulture.Russian, "Даёт бафф Колдовства (увеличивает максимальное число прислужников)");
+
+            DisplayName.AddTranslation(GameCulture.Chinese, "迷人药剂");
+            Tooltip.AddTranslation(GameCulture.Chinese, "增加召唤物能力 (增加一个召唤物上限)");
+        }    
 		public override void SetDefaults()
         {
             item.UseSound = SoundID.Item3;                 //this is the sound that plays when you use the item

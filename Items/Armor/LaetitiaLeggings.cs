@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
 
 namespace AlchemistNPC.Items.Armor
@@ -20,9 +21,11 @@ namespace AlchemistNPC.Items.Armor
 			+ "\n[c/FF0000:EGO armor piece]"
 			+ "\nIncreases summon damage by 10%"
 			+ "\nDefense grows stronger when certain bosses are killed"
-			+ "\nArmor's current defense will be shown in inventory");
-			Tooltip.AddTranslation(GameCulture.Russian, "Ленточка на плаще отражает мольбу дитя о счастье. Дитя, что не может покинуть своих друзей.\n[c/FF0000:Э.П.О.С часть брони]\nУвеличивает урон прислужников на 10%\nЗащита брони увеличивается после победы над определённым боссами\nТекущая защита брони будет показана в инвентаре");
-		}
+			+ "\nArmor's base defense is 4");
+            Tooltip.AddTranslation(GameCulture.Russian, "Ленточка на плаще отражает мольбу дитя о счастье. Дитя, что не могло покинуть своих друзей.\n[c/FF0000:Часть брони Э.П.О.С.]\nУвеличивает урон прислужников на 10%\nЗащита увеличивается после убийства определенных боссов\nБазовая защита равна 4");
+            DisplayName.AddTranslation(GameCulture.Chinese, "蕾蒂希娅袜统 (O-01-67)");
+            Tooltip.AddTranslation(GameCulture.Chinese, "'外套上精美的丝带和蝴蝶结寄托着少女对幸福的向往, 一个孩子不能离开朋友.'\n[c/FF0000:EGO 盔甲]\n增加10%召唤物伤害\n击败特定Boss之后增加防御力\n基础防御力为4");
+        }
 
 		public override void SetDefaults()
 		{
@@ -35,39 +38,101 @@ namespace AlchemistNPC.Items.Armor
 
 		public override void UpdateEquip(Player player)
 		{
-			player.minionDamage += 0.1f;;
+			player.minionDamage += 0.1f;
 			item.defense = ad;
 			ad = 4;
-			if (NPC.downedBoss3 && !Main.hardMode)
+			if (NPC.downedQueenBee)
 			{
-			ad = 6;
+				ad = 5;
 			}
-			if (Main.hardMode && !NPC.downedMechBossAny)
+			if (NPC.downedBoss3)
 			{
-			ad = 9;
+				ad = 6;
+			}
+			if (Main.hardMode)
+			{
+				ad = 9;
 			}
 			if (NPC.downedMechBossAny)
 			{
-			ad = 13;
+				ad = 11;
+			}
+			if (NPC.downedMechBoss1 && NPC.downedMechBoss2 && NPC.downedMechBoss3)
+			{
+				ad = 13;
+			}
+			if (NPC.downedPlantBoss)
+			{
+				ad = 15;
+			}
+			if (NPC.downedGolemBoss)
+			{
+				ad = 17;
+			}
+			if (NPC.downedFishron)
+			{
+				ad = 19;
+			}
+			if (NPC.downedAncientCultist)
+			{
+				ad = 20;
+			}
+			if (NPC.downedMoonlord)
+			{
+				ad = 23;
 			}
 		}
 		
-		public override void UpdateInventory(Player player)
+		public override void ModifyTooltips(List<TooltipLine> tooltips)
 		{
-		item.defense = ad;
-		ad = 4;
-		if (NPC.downedBoss3 && !Main.hardMode)
+			Player player = Main.player[Main.myPlayer];
+			item.defense = ad;
+			ad = 4;
+			if (NPC.downedQueenBee)
 			{
-			ad = 6;
+				ad = 5;
 			}
-		if (Main.hardMode)
+			if (NPC.downedBoss3)
 			{
-			ad = 9;
+				ad = 6;
 			}
-		if (NPC.downedMechBossAny)
+			if (Main.hardMode)
 			{
-			ad = 13;
+				ad = 9;
 			}
+			if (NPC.downedMechBossAny)
+			{
+				ad = 11;
+			}
+			if (NPC.downedMechBoss1 && NPC.downedMechBoss2 && NPC.downedMechBoss3)
+			{
+				ad = 13;
+			}
+			if (NPC.downedPlantBoss)
+			{
+				ad = 15;
+			}
+			if (NPC.downedGolemBoss)
+			{
+				ad = 17;
+			}
+			if (NPC.downedFishron)
+			{
+				ad = 19;
+			}
+			if (NPC.downedAncientCultist)
+			{
+				ad = 20;
+			}
+			if (NPC.downedMoonlord)
+			{
+				ad = 23;
+			}
+			string text1 = ad + " defense";
+			TooltipLine line = new TooltipLine(mod, "text1", text1);
+			line.overrideColor = Color.White;
+			tooltips.RemoveAt(2);
+			tooltips.Insert(2,line);
 		}
 		
 		public override void AddRecipes()

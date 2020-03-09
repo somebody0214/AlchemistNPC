@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
  
 namespace AlchemistNPC.Items
@@ -14,10 +15,13 @@ namespace AlchemistNPC.Items
         public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Blurring Potion");
-			Tooltip.SetDefault("Grants Blurring buff (activates Shadow Dodge after CD)");
+			Tooltip.SetDefault("Grants Blurring buff (activates Shadow Dodge for 10 sec after 30 sec CD)");
 			DisplayName.AddTranslation(GameCulture.Russian, "Зелье Размытия");
-			Tooltip.AddTranslation(GameCulture.Russian, "Даёт бафф Размытие (включает Теневое Уклонение с 20-ти секундным откатом)"); 
-		}    
+            Tooltip.AddTranslation(GameCulture.Russian, "Даёт бафф Размытие (включает Теневое Уклонение с 30-ти секундным откатом)");
+
+            DisplayName.AddTranslation(GameCulture.Chinese, "模糊药水");
+            Tooltip.AddTranslation(GameCulture.Chinese, "获得模糊Buff (持续10秒暗影躲避,CD时间30秒)");
+        }    
 		public override void SetDefaults()
         {
             item.UseSound = SoundID.Item3;                 //this is the sound that plays when you use the item

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using System;
 using AlchemistNPC.Items.Weapons;
 
@@ -33,10 +34,6 @@ namespace AlchemistNPC.Projectiles
 		
 		public override void ModifyHitNPC (NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
 		{
-			if (target.lifeMax > 10000)
-			{
-			damage = 300;
-			}
 			if (target.lifeMax <= 10000)
 			{
 			damage = 10000;

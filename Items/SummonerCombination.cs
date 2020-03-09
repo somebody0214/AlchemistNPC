@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
  
 namespace AlchemistNPC.Items
@@ -14,10 +15,13 @@ namespace AlchemistNPC.Items
         public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Summoner Combination");
-			Tooltip.SetDefault("Grants buffs, which are necessary for Summoners (Battle, Summoning, Bewitched, Wrath)");
+			Tooltip.SetDefault("Grants buffs, which are necessary for Summoners (Summoning, Bewitched, Wrath)");
 			DisplayName.AddTranslation(GameCulture.Russian, "Комбинация Призывателя");
-			Tooltip.AddTranslation(GameCulture.Russian, "аёт баффы, необходимые для Призывателя(Битва, Призыв, Колдовство, Гнев)"); 
-		}    
+			Tooltip.AddTranslation(GameCulture.Russian, "Даёт баффы, необходимые для Призывателя (Призыв, Колдовство, Гнев)");
+
+            DisplayName.AddTranslation(GameCulture.Chinese, "召唤师药剂包");
+            Tooltip.AddTranslation(GameCulture.Chinese, "获得一些召唤Buff (召唤, 迷人, 怒气)");
+        }    
 		public override void SetDefaults()
         {
             item.UseSound = SoundID.Item3;                 //this is the sound that plays when you use the item
@@ -39,7 +43,6 @@ namespace AlchemistNPC.Items
 		public override void AddRecipes()
 		{
 			ModRecipe recipe = new ModRecipe(mod);
-			recipe.AddIngredient(ItemID.BattlePotion, 1);
 			recipe.AddIngredient(ItemID.SummoningPotion, 1);
 			recipe.AddIngredient(null, "BewitchingPotion", 1);
 			recipe.AddIngredient(ItemID.WrathPotion, 1);

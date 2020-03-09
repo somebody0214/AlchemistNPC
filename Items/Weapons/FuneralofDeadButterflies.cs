@@ -4,6 +4,7 @@ using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.Localization;
 
 namespace AlchemistNPC.Items.Weapons
@@ -13,23 +14,29 @@ namespace AlchemistNPC.Items.Weapons
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Solemn Vow (T-01-68)");
-			Tooltip.SetDefault("High atmosphere. One represents sadness of dead and other represents fear of living."
+			Tooltip.SetDefault("''The atmosphere is grave."
+			+ "\nOne represents the sadness of the dead, the other represents fear of the quick.''"
 			+ "\n[c/FF0000:EGO weapon]"
 			+ "\nInflicts Shadowflame and Frostburn"
 			+ "\n35% chance not to consume ammo");
 			DisplayName.AddTranslation(GameCulture.Russian, "Торжественная клятва (T-01-68)");
-			Tooltip.AddTranslation(GameCulture.Russian, "Высокая атмосфера. Один отражает грусть мёртвых, а другой отражает страх живущих.\n[c/FF0000:Э.П.О.С. оружие]\nНакладывает Теневое Пламя и Морозный Ожог\n35% шанс не потратить патроны"); 
+            Tooltip.AddTranslation(GameCulture.Russian, "''Печальная атмосфера. Один отражает грусть мёртвых, а другой отражает страх живущих.''\n[c/FF0000:Оружие Э.П.О.С.]\nНакладывает Теневое Пламя и Морозный Ожог\n35% шанс не потратить патроны");
+			DisplayName.AddTranslation(GameCulture.Chinese, "圣宣 (T-01-68)");
+			Tooltip.AddTranslation(GameCulture.Chinese, "''这两把枪令人感到严肃."
+			+"\n死者之哀, 死亡之惧, 烙印其上.''"
+			+"\n[c/FF0000:EGO 武器]"
+			+"\n造成暗影烈焰和霜火"
+			+"\n35%概率不消耗弹药");
 		}
 
 		public override void SetDefaults()
 		{
-			item.damage = 36;
+			item.damage = 26;
 			item.ranged = true;
 			item.width = 40;
 			item.height = 20;
-			item.useAnimation = 4;
-			item.useTime = 2;
-			item.reuseDelay = 20;
+			item.useAnimation = 10;
+			item.useTime = 10;
 			item.useStyle = 5;
 			item.noMelee = true;
 			item.knockBack = 4;
@@ -44,8 +51,9 @@ namespace AlchemistNPC.Items.Weapons
 
 		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
 		{
-			type = mod.ProjectileType("FDB");
-			return true;
+			Projectile.NewProjectile(position.X, position.Y-5, speedX, speedY, type, (damage/3)*2, knockBack, player.whoAmI);
+			Projectile.NewProjectile(position.X, position.Y, speedX, speedY, mod.ProjectileType("FDB"), (damage/3)*2, knockBack, player.whoAmI);
+			return false;
 		}
 		
 		public override bool ConsumeAmmo(Player player)
@@ -56,6 +64,19 @@ namespace AlchemistNPC.Items.Weapons
 		public override Vector2? HoldoutOffset()
 		{
 			return new Vector2(8, 0);
+		}
+		
+		public override bool CanUseItem(Player player)
+		{
+			if (((AlchemistNPCPlayer)player.GetModPlayer(mod, "AlchemistNPCPlayer")).ParadiseLost == true)
+			{
+				item.damage = 125;
+			}
+			else
+			{
+				item.damage = 26;
+			}
+			return base.CanUseItem(player);
 		}
 		
 		public override void AddRecipes()

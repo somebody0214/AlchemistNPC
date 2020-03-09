@@ -5,6 +5,7 @@ using Terraria.ID;
 using Terraria.Enums;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 using Terraria.ObjectData;
 using Terraria.DataStructures;
 
@@ -12,22 +13,22 @@ namespace AlchemistNPC.Tiles
 {
 	public class Wellcheers : ModTile
 	{
-		public int counter = 0;
+		public static int counter = 0;
 		public override void SetDefaults()
 		{
 			Main.tileLighted[Type] = true;
 			Main.tileFrameImportant[Type] = true;
-			Main.tileNoAttach[Type] = true;
 			Main.tileLavaDeath[Type] = true;
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style3x4);
-			TileObjectData.newTile.CoordinateHeights = new int[]{ 16, 16, 16, 16 };
+			TileObjectData.newTile.CoordinateHeights = new[]{16, 16, 16, 18};
 			TileObjectData.newTile.StyleHorizontal = true;
-			TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
+			TileObjectData.newTile.StyleWrapLimit = 36;
 			TileObjectData.addTile(Type);
 			ModTranslation name = CreateMapEntryName();
 			name.SetDefault("Wellcheers");
-			name.AddTranslation(GameCulture.Russian, "Машина по продаже напитков 'Wellcheers'");
-			AddMapEntry(new Color(200, 200, 200), name);
+			name.AddTranslation(GameCulture.Russian, "Торговый автомат 'Wellcheers'");
+            name.AddTranslation(GameCulture.Chinese, "韦尔奇乐自动售货机");
+            AddMapEntry(new Color(200, 200, 200), name);
 			disableSmartCursor = true;
 			adjTiles = new int[]{ TileID.Books };
 		}
@@ -48,50 +49,70 @@ namespace AlchemistNPC.Tiles
 			}
 		}
 		
-		public override void RightClick(int i, int j)
+		public override bool NewRightClick(int i, int j)
 		{
-			Player player = Main.LocalPlayer;
-			if (counter != 10 && !Main.dayTime && !NPC.AnyNPCs(125) && !NPC.AnyNPCs(126) && !NPC.AnyNPCs(127) && !NPC.AnyNPCs(134))
+			for (int k = 0; k < 255; k++)
 			{
-			switch (Main.rand.Next(4))
+			Player player = Main.player[k];
+			if (player.active)
 				{
-					case 0:						
-					player.QuickSpawnItem(mod.ItemType("CrimsonCherrySoda"));
-					counter++;
-					break;
-					case 1:
-					player.QuickSpawnItem(mod.ItemType("SapphireBlueberrySoda"));
-					counter++;
-					break;
-					case 2:
-					player.QuickSpawnItem(mod.ItemType("PinkGoldStrawberrySoda"));
-					counter++;
-					break;
-					case 3:
-					player.QuickSpawnItem(mod.ItemType("OnyxGrapeSoda"));
-					counter++;
-					break;
+				if (counter != 10 && !Main.dayTime && !NPC.AnyNPCs(125) && !NPC.AnyNPCs(126) && !NPC.AnyNPCs(127) && !NPC.AnyNPCs(134))
+					{
+					switch (Main.rand.Next(4))
+						{
+							case 0:						
+							player.QuickSpawnItem(mod.ItemType("CrimsonCherrySoda"));
+							counter++;
+							break;
+							case 1:
+							player.QuickSpawnItem(mod.ItemType("SapphireBlueberrySoda"));
+							counter++;
+							break;
+							case 2:
+							player.QuickSpawnItem(mod.ItemType("PinkGoldStrawberrySoda"));
+							counter++;
+							break;
+							case 3:
+							player.QuickSpawnItem(mod.ItemType("OnyxGrapeSoda"));
+							counter++;
+							break;
+						}
+					}
+					if (counter == 10 && !Main.dayTime)
+					{
+						Mod ALIB = ModLoader.GetMod("AchievementLib");
+						if(ALIB != null)
+						{
+							ALIB.Call("UnlockGlobal", "AlchemistNPC", "The snack that smiles back");
+						}
+						if (Main.netMode == 0)
+						{
+							switch (Main.rand.Next(3))
+							{
+							case 0:
+							NPC.SpawnOnPlayer(player.whoAmI, NPCID.SkeletronPrime);
+							counter = 0;
+							break;
+							case 1:
+							NPC.SpawnOnPlayer(player.whoAmI, NPCID.Retinazer);
+							NPC.SpawnOnPlayer(player.whoAmI, NPCID.Spazmatism);
+							counter = 0;
+							break;
+							case 2:
+							NPC.SpawnOnPlayer(player.whoAmI, NPCID.TheDestroyer);
+							counter = 0;
+							break;
+							}
+						}
+						if(Main.netMode != 0)
+						{
+						Main.player[Main.myPlayer].AddBuff(mod.BuffType("EvilPresence"), 1);
+						counter = 0;
+						}
+					}
 				}
 			}
-			if (counter == 10 && !Main.dayTime)
-			{
-				switch (Main.rand.Next(3))
-				{
-				case 0:
-				NPC.SpawnOnPlayer(player.whoAmI, NPCID.SkeletronPrime);
-				counter = 0;
-				break;
-				case 1:
-				NPC.SpawnOnPlayer(player.whoAmI, NPCID.Retinazer);
-				NPC.SpawnOnPlayer(player.whoAmI, NPCID.Spazmatism);
-				counter = 0;
-				break;
-				case 2:
-				NPC.SpawnOnPlayer(player.whoAmI, NPCID.TheDestroyer);
-				counter = 0;
-				break;
-				}
-			}
+			return true;
 		}
 
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
@@ -101,7 +122,8 @@ namespace AlchemistNPC.Tiles
 		
 		public override void MouseOver(int i, int j)
 		{
-			Player player = Main.LocalPlayer;
+			int whoAmI = 0;
+			Player player = Main.player[whoAmI];
 			player.noThrow = 2;
 			player.showItemIcon = true;
 			player.showItemIcon2 = mod.ItemType("Wellcheers");
